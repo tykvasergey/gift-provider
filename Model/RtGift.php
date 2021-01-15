@@ -30,6 +30,14 @@ class RtGift extends AbstractModel implements RtGiftInterface
         return $this->getData(self::NAME);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getDescription(): ?string
+    {
+        return $this->getData(self::DESCRIPTION);
+    }
+
     public function getRtId(): int
     {
         return $this->getData(self::RT_ID);
@@ -92,6 +100,11 @@ class RtGift extends AbstractModel implements RtGiftInterface
     public function setName(string $name)
     {
         return $this->setData(self::NAME, $name);
+    }
+
+    public function setDescription(string $description)
+    {
+        return $this->setData(self::DESCRIPTION, $description);
     }
 
     public function setRtId($rtId)
