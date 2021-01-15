@@ -4,5 +4,7 @@
     <menu>
         <add id="WiserBrand_RealThanks::main" title="Real Thanks" module="WiserBrand_RealThanks" sortOrder="30" parent="Magento_Backend::marketing" resource="WiserBrand_RealThanks::rt_admin"/>
         <add id="WiserBrand_RealThanks::gift" title="Gifts" module="WiserBrand_RealThanks" sortOrder="10" parent="WiserBrand_RealThanks::main" action="realthanks/gift" resource="WiserBrand_RealThanks::rt_admin"/>
+        <add id="WiserBrand_RealThanks::order" title="Order" module="WiserBrand_RealThanks" sortOrder="20" parent="WiserBrand_RealThanks::main" action="realthanks/rtorder" resource="WiserBrand_RealThanks::rt_admin"/>
+        <add id="WiserBrand_RealThanks::settings" title="Settings" module="WiserBrand_RealThanks" sortOrder="30" parent="WiserBrand_RealThanks::main" action="adminhtml/system_config/edit/section/realthanks" resource="WiserBrand_RealThanks::rt_admin"/>
     </menu>
 </config>
