@@ -27,10 +27,18 @@
             <argument name="resourceModel" xsi:type="string">WiserBrand\RealThanks\Model\ResourceModel\RtGift</argument>
         </arguments>
     </virtualType>
+    <virtualType name="WiserBrand\RealThanks\RtOrder\DataProvider\SearchResult"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wiser_brand_rt_order</argument>
+            <argument name="resourceModel" xsi:type="string">WiserBrand\RealThanks\Model\ResourceModel\RtOrder</argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="grid_gift_list_data_source" xsi:type="string">WiserBrand\RealThanks\Gift\DataProvider\SearchResult</item>
+                <item name="grid_order_list_data_source" xsi:type="string">WiserBrand\RealThanks\RtOrder\DataProvider\SearchResult</item>
             </argument>
         </arguments>
     </type>

@@ -8,6 +8,7 @@ interface RtGiftInterface
 {
     const ENTITY_ID     = 'entity_id';
     const NAME          = 'name';
+    const DESCRIPTION   = 'description';
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME   = 'update_time';
     const COST          = 'cost';
@@ -24,6 +25,11 @@ interface RtGiftInterface
      * @return string
      */
     public function getName() : string;
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string;
 
     /**
      * @return float

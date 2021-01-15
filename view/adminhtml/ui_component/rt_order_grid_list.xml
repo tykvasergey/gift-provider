@@ -3,15 +3,15 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">rt_gift_grid_list.grid_gift_list_data_source</item>
-            <item name="deps" xsi:type="string">rt_gift_grid_list.grid_gift_list_data_source</item>
+            <item name="provider" xsi:type="string">rt_order_grid_list.grid_order_list_data_source</item>
+            <item name="deps" xsi:type="string">rt_order_grid_list.grid_order_list_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">gift_columns</item>
+        <item name="spinner" xsi:type="string">order_columns</item>
     </argument>
-    <dataSource name="grid_gift_list_data_source">
+    <dataSource name="grid_order_list_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">grid_gift_list_data_source</argument>
+            <argument name="name" xsi:type="string">grid_order_list_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">entity_id</argument>
             <argument name="data" xsi:type="array">
@@ -38,9 +38,9 @@
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="columnsProvider" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.gift_columns</item>
+                    <item name="columnsProvider" xsi:type="string">rt_order_grid_list.rt_order_grid_list.order_columns</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">rt_order_grid_list.rt_order_grid_list.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.filters</item>
                     </item>
                     <item name="templates" xsi:type="array">
@@ -52,9 +52,9 @@
                         </item>
                     </item>
                     <item name="childDefaults" xsi:type="array">
-                        <item name="provider" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.listing_top.listing_filters</item>
+                        <item name="provider" xsi:type="string">rt_order_grid_list.rt_order_grid_list.listing_top.listing_filters</item>
                         <item name="imports" xsi:type="array">
-                            <item name="visible" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.gift_columns.${ $.index }:visible</item>
+                            <item name="visible" xsi:type="string">rt_order_grid_list.rt_order_grid_list.order_columns.${ $.index }:visible</item>
                         </item>
                     </item>
                 </item>
@@ -67,15 +67,15 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">rt_order_grid_list.rt_order_grid_list.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.paging</item>
                     </item>
-                    <item name="selectProvider" xsi:type="string">rt_gift_grid_list.rt_gift_grid_list.gift_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">rt_order_grid_list.rt_order_grid_list.order_columns.ids</item>
                 </item>
             </argument>
         </paging>
     </container>
-    <columns name="gift_columns">
+    <columns name="order_columns">
         <selectionsColumn name="ids">
            <argument name="data" xsi:type="array">
                <item name="config" xsi:type="array">
@@ -92,35 +92,25 @@
                 <sorting>asc</sorting>
             </settings>
         </column>
-        <!-- @todo needs to adapt for image_url column thumbnail-->
-<!--        <column name="thumbnail" class="Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">-->
-<!--            <settings>-->
-<!--                <altField>name</altField>-->
-<!--                <hasPreview>1</hasPreview>-->
-<!--                <addField>true</addField>-->
-<!--                <label translate="true">Thumbnail</label>-->
-<!--                <sortable>false</sortable>-->
-<!--            </settings>-->
-<!--        </column>-->
-        <column name="name">
+        <column name="email">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Name</label>
+                <label translate="true">Recipient</label>
             </settings>
         </column>
-        <column name="description">
+        <column name="subject">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Description</label>
+                <label translate="true">Subject</label>
             </settings>
         </column>
-        <column name="cost" component="Magento_Ui/js/grid/columns/select">
+        <column name="message">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Cost</label>
+                <label translate="true">Message</label>
             </settings>
         </column>
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+        <column name="is_complete" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <filter>select</filter>
@@ -128,7 +118,13 @@
                     <editorType>select</editorType>
                 </editor>
                 <dataType>select</dataType>
-                <label translate="true">Status</label>
+                <label translate="true">Is Complete</label>
+            </settings>
+        </column>
+        <column name="status">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Status Description</label>
             </settings>
         </column>
         <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
