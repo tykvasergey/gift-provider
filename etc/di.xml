@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--  Synchronizer settings  START -->
+    <virtualType name="FullSynchronizerList"
+                 type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface">
+        <arguments>
+            <argument name="synchronizerList" xsi:type="array">
+                <item name="gift" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\GiftSynchronizer</item>
+                <item name="order" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\OrderSynchronizer</item>
+                <item name="balance" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\BalanceSynchronizer</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="WiserBrand\RealThanks\Controller\Adminhtml\Config\Sync">
+        <arguments>
+            <argument name="syncList" xsi:type="object">FullSynchronizerList</argument>
+        </arguments>
+    </type>
+    <!--  Synchronizer settings  END -->
+
+    <!--  Data provider settings  START -->
+    <virtualType name="WiserBrand\RealThanks\Gift\DataProvider\SearchResult"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wiser_brand_rt_gift</argument>
+            <argument name="resourceModel" xsi:type="string">WiserBrand\RealThanks\Model\ResourceModel\RtGift</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="grid_gift_list_data_source" xsi:type="string">WiserBrand\RealThanks\Gift\DataProvider\SearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+    <!--  Data provider settings  END -->
+</config>

@@ -28,6 +28,7 @@
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="email" nullable="false" length="40" comment="RealThanks Order recipient email"/>
         <column xsi:type="varchar" name="subject" length="40" nullable="false"/>
+        <column xsi:type="varchar" name="status" length="40" nullable="false"/>
         <column xsi:type="text" name="message" nullable="false"/>
         <column xsi:type="boolean" name="is_complete"  nullable="false" default="0"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"

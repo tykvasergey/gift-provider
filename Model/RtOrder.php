@@ -8,6 +8,8 @@ use WiserBrand\RealThanks\Model\ResourceModel\RtOrder as ResourceModel;
 
 class RtOrder extends AbstractModel implements RtOrderInterface
 {
+    const COMPLETE_STATUS = "Complete";
+
     /**
      * @var string
      */
@@ -26,7 +28,7 @@ class RtOrder extends AbstractModel implements RtOrderInterface
      */
     public function getStatus(): string
     {
-        // TODO: Implement getStatus() method.
+        return $this->getData(self::STATUS);
     }
 
     /**
@@ -34,7 +36,7 @@ class RtOrder extends AbstractModel implements RtOrderInterface
      */
     public function getEmail(): string
     {
-        // TODO: Implement getEmail() method.
+        return $this->getData(self::EMAIL);
     }
 
     /**
@@ -42,6 +44,80 @@ class RtOrder extends AbstractModel implements RtOrderInterface
      */
     public function getSubject(): string
     {
-        // TODO: Implement getSubject() method.
+        return $this->getData(self::SUBJECT);
+    }
+
+    public function getRtId(): int
+    {
+        return $this->getData(self::RT_ID);
+    }
+
+    public function getGiftIdt(): int
+    {
+        return $this->getData(self::GIFT_ID);
+    }
+
+    public function getMessage(): string
+    {
+        return $this->getData(self::MSG);
+    }
+
+    /**
+     * Is active
+     *
+     * @return bool
+     */
+    public function isComplete():bool
+    {
+        return (bool)$this->getData(self::COMPLETE);
+    }
+
+    /**
+     * Set ID
+     *
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        return $this->setData(self::ENTITY_ID, $id);
+    }
+
+    public function setStatus(string $status)
+    {
+        if ($status == self::COMPLETE_STATUS) {
+            $this->setIsComplete(true);
+        }
+        return $this->setData(self::STATUS, $status);
+    }
+
+    public function setRtId($rtId)
+    {
+        return $this->setData(self::RT_ID, $rtId);
+    }
+
+    public function setSubject(string $subject)
+    {
+        return $this->setData(self::SUBJECT, $subject);
+    }
+
+    public function setMessage(string $message)
+    {
+        return $this->setData(self::MSG, $message);
+    }
+
+    public function setIsComplete(bool $flag)
+    {
+        return $this->setData(self::COMPLETE, $flag);
+    }
+
+    public function setEmail(string $email)
+    {
+        return $this->setData(self::EMAIL, $email);
+    }
+
+    public function setGiftIdt(int $giftId)
+    {
+        return $this->setData(self::GIFT_ID, $giftId);
     }
 }

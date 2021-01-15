@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="WiserBrand_RealThanks::main" title="Real Thanks" module="WiserBrand_RealThanks" sortOrder="30" parent="Magento_Backend::marketing" resource="WiserBrand_RealThanks::rt_admin"/>
+        <add id="WiserBrand_RealThanks::gift" title="Gifts" module="WiserBrand_RealThanks" sortOrder="10" parent="WiserBrand_RealThanks::main" action="realthanks/gift" resource="WiserBrand_RealThanks::rt_admin"/>
+    </menu>
+</config>
