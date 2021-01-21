@@ -12,7 +12,7 @@ interface RtGiftInterface
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME   = 'update_time';
     const COST          = 'cost';
-    const ACTIVE        = 'is_active';
+    const ACTIVE        = 'active';
     const IMAGE_URL     = 'image_url';
     const RT_ID         = 'rt_gift_id';
 

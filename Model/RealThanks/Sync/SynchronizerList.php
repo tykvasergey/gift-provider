@@ -12,6 +12,14 @@ class SynchronizerList implements SynchronizerListInterface
     protected $synchronizerList;
 
     /**
+     * @param SynchronizerInterface[] $synchronizerList
+     */
+    public function __construct(array $synchronizerList)
+    {
+        $this->synchronizerList = $synchronizerList;
+    }
+
+    /**
      * @return SynchronizerInterface
      */
     public function current()

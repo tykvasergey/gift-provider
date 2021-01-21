@@ -16,6 +16,6 @@ class RtOrder extends AbstractDb
      */
     public function _construct()
     {
-        $this->_init('wiser_brund_rt_order', 'entity_id');
+        $this->_init('wiser_brand_rt_order', 'entity_id');
     }
 }

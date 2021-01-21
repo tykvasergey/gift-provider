@@ -20,10 +20,21 @@ class OrderSynchronizer implements SynchronizerInterface
      */
     private $adapter;
 
+
     /**
      * @var array
      */
     private $rtOrdersToUpdate = [];
+
+    /**
+     * @param RtOrderRepository $rtOrderRepository
+     * @param Adapter $adapter
+     */
+    public function __construct(RtOrderRepository $rtOrderRepository, Adapter $adapter)
+    {
+        $this->rtOrderRepository = $rtOrderRepository;
+        $this->adapter = $adapter;
+    }
 
     private function init(): void
     {

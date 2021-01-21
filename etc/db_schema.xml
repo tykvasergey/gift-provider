@@ -7,9 +7,9 @@
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="name" nullable="false" length="40" comment="RealThanks Gift Name or Title"/>
         <column xsi:type="text" name="description" nullable="true" comment="RealThanks Gift Description"/>
-        <column xsi:type="decimal" name="cost" nullable="false" scale="4" precision="12" comment="RealThanks Gift cost"/>
+        <column xsi:type="decimal" name="cost" nullable="false" scale="4" precision="12" comment="RealThanks Gift price"/>
         <column xsi:type="text" name="image_url" nullable="false" comment="RealThanks Gift image URL"/>
-        <column xsi:type="boolean" name="is_active"  nullable="false" default="1" comment="Is RealThanks Gift Active"/>
+        <column xsi:type="boolean" name="active"  nullable="false" default="1" comment="Is RealThanks Gift Active"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="RealThanks Gift Creation Time"/>
         <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
@@ -47,6 +47,20 @@
                     column="gift_id" referenceTable="wiser_brand_rt_gift" referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="wiser_brand_rt_sync_log" resource="default" engine="innodb">
+        <column xsi:type="int" name="sync_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="boolean" name="success" nullable="false" default="0" comment="Is sync was successful"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="20" default="undefined" comment="Sync type"/>
+        <column xsi:type="varchar" name="message" nullable="true" length="255" comment="Error message"/>
+        <column xsi:type="decimal" name="balance" nullable="true" scale="4" precision="12" comment="RealThanks account current balance"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Synchronization Start Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sync_id"/>
         </constraint>
     </table>
 </schema>

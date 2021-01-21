@@ -122,8 +122,8 @@ class RtGift extends AbstractModel implements RtGiftInterface
         return $this->setData(self::IMAGE_URL, $url);
     }
 
-    public function setIsActive($isActive)
+    public function setActive($isActive)
     {
-        return $this->setData(self::IS_ACTIVE, $isActive);
+        return $this->setData(self::ACTIVE, $isActive);
     }
 }

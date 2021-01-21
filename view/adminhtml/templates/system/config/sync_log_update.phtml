@@ -1,0 +1,50 @@
+<?php
+/** @var \WiserBrand\RealThanks\Block\Adminhtml\System\Config\Updater $block */
+?>
+<script type="text/javascript">
+    //just to load jQuery on this page
+    require(["jquery"], function () {
+    });
+
+    function updateData() {
+        jQuery.ajax({
+            type: "GET",
+            showLoader: true,
+            data: {},
+            url: '<?php echo /* @escapeNotVerified */ $block->getDataUpdaterUrl() ?>',
+            success: function (result, status) {
+                debugger;
+                if (result.ajaxExpired) {
+                    window.location = result.ajaxRedirect;
+                } else {
+                    location.reload();
+                }
+            },
+            error: function () {
+                location.reload();
+            },
+            dataType: "json"
+        });
+        return false;
+    }
+
+</script>
+<button name="load_data" onclick="return updateData();"><?php echo __('Update RealThanks data') ?></button>
+<?php
+$balance = __('Current account balance - %1', $block->getCurrentBalance());
+if ($block->getSyncLogDate() === null) {
+    $class = 'message-notice';
+    $message = __('No previous synchronizations with RealThanks found');
+} else {
+    if ($block->isSuccessful()) {
+        $class = 'message-success';
+        $message = __('Last synchronization at %1 UTC was successful', $block->getSyncLogDate());
+    } else {
+        $class = 'message-error';
+        $message = __('Last synchronizations at %1 UTC was failed: %2', $block->getSyncLogDate(), $block->getErrorMessage());
+    }
+}
+// @todo rename ccs classes
+?>
+<div class="message <?php echo $class ?>" data-ui-id="sync-status"><?php echo $message ?></div>
+<div class="message message-balance" ><?php echo $balance ?></div>

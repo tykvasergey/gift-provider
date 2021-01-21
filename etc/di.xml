@@ -1,9 +1,12 @@
 <?xml version="1.0"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--@todo remove some instructions to area specific di.xml -->
+    <!--@todo implement api interfaces -->
     <!--  Synchronizer settings  START -->
+    <preference for="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface" type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerList" />
     <virtualType name="FullSynchronizerList"
-                 type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface">
+                 type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerList"> <!--@todo why I cant use interface? -->
         <arguments>
             <argument name="synchronizerList" xsi:type="array">
                 <item name="gift" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\GiftSynchronizer</item>
@@ -12,7 +15,7 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="WiserBrand\RealThanks\Controller\Adminhtml\Config\Sync">
+    <type name="WiserBrand\RealThanks\Controller\Adminhtml\Config\Update">
         <arguments>
             <argument name="syncList" xsi:type="object">FullSynchronizerList</argument>
         </arguments>

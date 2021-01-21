@@ -17,6 +17,6 @@ class RtGift extends AbstractDb
      */
     protected function _construct()
     {
-        $this->_init('wiser_brund_rt_gift', 'entity_id');
+        $this->_init('wiser_brand_rt_gift', 'entity_id');
     }
 }
