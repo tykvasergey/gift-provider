@@ -85,42 +85,42 @@
                </item>
            </argument>
        </selectionsColumn>
-        <column name="entity_id">
+        <column name="entity_id" sortOrder="5">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
                 <sorting>asc</sorting>
             </settings>
         </column>
-        <!-- @todo needs to adapt for image_url column thumbnail-->
-<!--        <column name="thumbnail" class="Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">-->
-<!--            <settings>-->
-<!--                <altField>name</altField>-->
-<!--                <hasPreview>1</hasPreview>-->
-<!--                <addField>true</addField>-->
-<!--                <label translate="true">Thumbnail</label>-->
-<!--                <sortable>false</sortable>-->
-<!--            </settings>-->
-<!--        </column>-->
-        <column name="name">
+        <column name="image_url"
+                class="WiserBrand\RealThanks\Ui\Component\Listing\Columns\Thumbnail"
+                component="Magento_Ui/js/grid/columns/thumbnail"
+                sortOrder="10">
+            <settings>
+                <altField>image</altField>
+                <hasPreview>0</hasPreview>
+                <label translate="true">Image</label>
+            </settings>
+        </column>
+        <column name="name" sortOrder="20">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Name</label>
             </settings>
         </column>
-        <column name="description">
+        <column name="description" sortOrder="30">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Description</label>
             </settings>
         </column>
-        <column name="cost">
+        <column name="cost" sortOrder="40">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Cost</label>
             </settings>
         </column>
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
             <settings>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <filter>select</filter>
@@ -131,14 +131,20 @@
                 <label translate="true">Active</label>
             </settings>
         </column>
-        <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+        <column name="creation_time"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date"
+                sortOrder="60">
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Created</label>
             </settings>
         </column>
-        <column name="update_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+        <column name="update_time"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date"
+                sortOrder="70">
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
