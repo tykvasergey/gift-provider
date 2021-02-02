@@ -7,6 +7,8 @@ use \Magento\Framework\Model\AbstractModel;
 class SyncLog extends AbstractModel
 {
     const BALANCE_LOG_TYPE = 'balance';
+    const GIFT_LOG_TYPE = 'gifts';
+    const ORDER_LOG_TYPE = 'order';
 
     /**
      * Initialize resource model

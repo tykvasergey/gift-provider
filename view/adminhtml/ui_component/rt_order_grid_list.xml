@@ -92,6 +92,18 @@
                 <sorting>asc</sorting>
             </settings>
         </column>
+        <column name="name" class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Columns\Name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="cost" class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Columns\Price">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Cost</label>
+            </settings>
+        </column>
         <column name="email">
             <settings>
                 <filter>text</filter>
@@ -141,5 +153,11 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
+        <actionsColumn name="actions"
+                       class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Action\ReSend">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

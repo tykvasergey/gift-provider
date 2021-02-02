@@ -17,11 +17,13 @@ class Adapter
     const BASE_API_URL = 'https://api.iced.me/v1/client/';
 
     const ORDER_ERROR_STATUSES = [
-        422 => 'Please check your RealThanks limit',
-        442 => 'You tried to send gift that is out-of-stock',
-        444 => 'Please synchronize gifts, your data (price) is outdated',
-        445 => 'Your balance is not enough for sending this order'
+        422 => 'please check your RealThanks limit',
+        442 => 'you tried to send gift that is out-of-stock',
+        444 => 'please synchronize gifts, your data (price) is outdated',
+        445 => 'your balance is not enough for sending this order',
+        446 => 'RealThanks payment processing is temporarily unavailable. Please try again later'
     ];
+
     /**
      * @var Curl
      */
@@ -118,7 +120,7 @@ class Adapter
         return (float) $result;
     }
 
-    public function sendGift(int $giftOrderId) : bool
+    public function sendGift(int $giftOrderId) : int
     {
         $this->init();
         $orderModel = $this->giftOrderRepo->getById($giftOrderId);
@@ -136,10 +138,7 @@ class Adapter
             if ($response && is_array($response)
                 && key_exists('data', $response)
                 && key_exists('order_id', $response['data'])) {
-                $id = $response['data']['order_id'];
-                $orderModel->setRtId($id);
-                $orderModel->setStatus('Sent');
-                $this->giftOrderRepo->save($orderModel);
+                $originalRtOrderId = $response['data']['order_id'];
             } else {
                 $strResponse = implode(' ,', $response);
                 $this->logger->error("RealThanks sendGift method. Incorrect response - {$strResponse}");
@@ -149,7 +148,7 @@ class Adapter
             $this->handleSendGiftErrorResponse();
         }
 
-        return true;
+        return $originalRtOrderId;
     }
 
     private function handleSendGiftErrorResponse() : void

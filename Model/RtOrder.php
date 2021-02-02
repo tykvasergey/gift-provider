@@ -47,7 +47,7 @@ class RtOrder extends AbstractModel implements RtOrderInterface
         return $this->getData(self::SUBJECT);
     }
 
-    public function getRtId(): int
+    public function getRtId(): ?int
     {
         return $this->getData(self::RT_ID);
     }

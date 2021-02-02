@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace WiserBrand\RealThanks\Model;
 
 use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchResult;
 use Magento\Framework\Api\Search\SearchResultFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -16,13 +15,12 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use WiserBrand\RealThanks\Api\Data\RtOrderInterface;
 use WiserBrand\RealThanks\Model\ResourceModel\RtOrder as GiftOrderResource;
-use WiserBrand\RealThanks\Model\RtOrder;
-use WiserBrand\RealThanks\Model\RtOrderFactory;
 use WiserBrand\RealThanks\Model\ResourceModel\RtOrder\Collection;
 use WiserBrand\RealThanks\Model\ResourceModel\RtOrder\CollectionFactory;
 
 class RtOrderRepository implements \WiserBrand\RealThanks\Api\RtOrderRepositoryInterface
 {
+    const RT_GIFT_TABLE_NAME = 'wiser_brand_rt_gift';
     /**
      * @var GiftOrderResource
      */
@@ -92,23 +90,22 @@ class RtOrderRepository implements \WiserBrand\RealThanks\Api\RtOrderRepositoryI
         $this->searchResultsFactory = $searchResultsFactory;
     }
 
-
     /**
      * @inheritDoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
     {
         /** @var Collection $collection */
-//        $collection = $this->resultCollectionFactory->create();
-//
-//        $this->collectionProcessor->process($searchCriteria, $collection);
-//
-//        $searchResults = $this->searchResultsFactory->create();
-//        $searchResults->setSearchCriteria($searchCriteria);
-//        $searchResults->setItems($collection->getItems());
-//        $searchResults->setTotalCount($collection->getSize());
-//
-//        return $searchResults;
+        $collection = $this->resultCollectionFactory->create();
+
+        $this->collectionProcessor->process($searchCriteria, $collection);
+
+        $searchResults = $this->searchResultsFactory->create();
+        $searchResults->setSearchCriteria($searchCriteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+
+        return $searchResults;
     }
 
     /**
@@ -154,5 +151,32 @@ class RtOrderRepository implements \WiserBrand\RealThanks\Api\RtOrderRepositoryI
     {
         //@todo
         return [];
+    }
+
+    public function getGiftAttributeById(string $attribute, $orderId)
+    {
+        /** @var Collection $collection */
+        $collection = $this->resultCollectionFactory->create();
+        $giftTable = $collection->getTable(self::RT_GIFT_TABLE_NAME);
+        $collection->addFieldToFilter('main_table.entity_id', $orderId);
+        $collection->addFieldToSelect('entity_id', 'order_id');
+        $collection->join(
+            $giftTable,
+            "main_table.gift_id={$giftTable}.entity_id",
+            $attribute,
+        );
+        $data = $collection->getData();
+
+        if (key_exists($attribute, $data[0])) {
+            return $data[0][$attribute];
+        }
+
+        throw new NoSuchEntityException(
+            __(
+                'The RealThanks gift Attribute - %1 for the order ID = %2 doesn\'t exist.',
+                $attribute,
+                $orderId
+            )
+        );
     }
 }

@@ -44,13 +44,12 @@ class Update extends Action implements HttpGetActionInterface
     public function execute()
     {
         $result = new \stdClass();
-        // @todo if one of sync is failed needs to send error to the template
         try {
             /** @var SynchronizerInterface $synchronizer */
             foreach ($this->syncList as $synchronizer) {
                 $synchronizer->synchronize();
             }
-            $result->success = true; // @todo is it necessary?
+            $result->success = true;
         } catch (\Exception $e) {
             $this->logger->critical($e->getMessage());
             $this->getResponse()->setStatusHeader(500, null, __('Cannot update data'));

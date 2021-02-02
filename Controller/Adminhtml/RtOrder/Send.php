@@ -6,12 +6,13 @@ namespace WiserBrand\RealThanks\Controller\Adminhtml\RtOrder;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Forward;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Psr\Log\LoggerInterface;
 use WiserBrand\RealThanks\Exception\RtApiException;
 use WiserBrand\RealThanks\Model\RealThanks\Adapter;
+use WiserBrand\RealThanks\Model\RtOrder;
+use WiserBrand\RealThanks\Model\RtOrderRepository;
 
 class Send extends Action implements HttpGetActionInterface
 {
@@ -28,16 +29,23 @@ class Send extends Action implements HttpGetActionInterface
     private $adapter;
 
     /**
+     * @var RtOrderRepository
+     */
+    private $giftOrderRepo;
+
+    /**
      * @var LoggerInterface
      */
     private $logger;
 
     public function __construct(
         Adapter $adapter,
+        RtOrderRepository $giftOrderRepo,
         LoggerInterface $logger,
         Context $context
     ) {
         $this->adapter = $adapter;
+        $this->giftOrderRepo = $giftOrderRepo;
         $this->logger = $logger;
         parent::__construct($context);
     }
@@ -52,21 +60,38 @@ class Send extends Action implements HttpGetActionInterface
 
         $orderId = (int) $this->getRequest()->getParam('order_id');
         try {
-            $this->adapter->sendGift($orderId);
+            $orderModel = $this->giftOrderRepo->getById($orderId);
+            $this->validateOrder($orderModel);
+            $originalRtOrderId = $this->adapter->sendGift($orderId);
+            $orderModel->setRtId($originalRtOrderId);
+            $orderModel->setStatus('Sent');
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             $this->messageManager->addSuccessMessage(__("Your gift was successfully sent. Your order id is - %1", $orderId));
         } catch (RtApiException $e) {
-            $this->messageManager->addErrorMessage(__("The gift can`t be send now! Your order id is - %1. Api error is - %2", $orderId, $e->getMessage()));
-
-            $resultRedirect->setUrl(self::RT_ORDER_GRID_URL);
+            $this->messageManager->addErrorMessage(__("The gift can`t be send now! Your order id is - %1. RealThanks API error is - %2", $orderId, $e->getMessage()));
+            $orderModel->setStatus('Error');
+            $resultRedirect->setUrl($this->getUrl(self::RT_ORDER_GRID_URL));
+        } catch (LocalizedException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+            $orderModel->setStatus('Error');
+            $resultRedirect->setUrl($this->getUrl(self::RT_ORDER_GRID_URL));
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage(__("The gift can`t be send now! Your order id is - %1, please check the order status", $orderId));
             $this->messageManager->addErrorMessage(__("RealThanks API error. Please check the log for the details"));
             $this->logger->error($e->getMessage());
-
-            $resultRedirect->setUrl(self::RT_ORDER_GRID_URL);
+            $orderModel->setStatus('Error');
+            $resultRedirect->setUrl($this->getUrl(self::RT_ORDER_GRID_URL));
         }
 
+        $this->giftOrderRepo->save($orderModel);
+
         return $resultRedirect;
+    }
+
+    private function validateOrder(RtOrder $orderModel): void
+    {
+        if ($orderModel->getRtId()) {
+            throw new LocalizedException(__("Order (id = %1) was already send. It can`t be send again."));
+        }
     }
 }
