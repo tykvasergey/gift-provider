@@ -29,20 +29,17 @@
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="email" nullable="false" length="40" comment="RealThanks Order recipient email"/>
         <column xsi:type="varchar" name="subject" length="40" nullable="false"/>
-        <column xsi:type="varchar" name="status" length="40" nullable="false"/>
+        <column xsi:type="varchar" name="status" length="40" nullable="false" default="New"/>
         <column xsi:type="text" name="message" nullable="false"/>
         <column xsi:type="boolean" name="is_complete"  nullable="false" default="0"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="RealThanks Order Creation Time"/>
         <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="RealThanks Order Modification Time"/>
-        <column xsi:type="int" name="rt_order_id" padding="10" unsigned="false" nullable="false"
+        <column xsi:type="int" name="rt_order_id" padding="10" unsigned="false" nullable="true"
                 comment="Original RealThanks Order ID"/>
         <column xsi:type="int" name="gift_id" padding="10" unsigned="false" nullable="false"
                 comment="Gift ID"/>
-        <constraint xsi:type="unique" referenceId="RT_GIFT_ID_UNIQUE">
-            <column name="rt_order_id"/>
-        </constraint>
         <constraint xsi:type="foreign" referenceId="RT_GIFT_ID" table="wiser_brand_rt_order"
                     column="gift_id" referenceTable="wiser_brand_rt_gift" referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

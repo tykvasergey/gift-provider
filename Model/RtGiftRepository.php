@@ -11,15 +11,16 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchCriteriaInterfaceFactory;
 use Magento\Framework\Api\SortOrderBuilder;
+use Magento\Framework\Data\SearchResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift as GiftResource;
-use WiserBrand\RealThanks\Api\Data\RtGiftInterface;
 use WiserBrand\RealThanks\Model\ResourceModel\RtGift\Collection;
+use WiserBrand\RealThanks\Model\ResourceModel\RtGift as GiftResource;
 use WiserBrand\RealThanks\Model\ResourceModel\RtGift\CollectionFactory;
-use WiserBrand\RealThanks\Model\RtGift;
+use WiserBrand\RealThanks\Api\Data\RtGiftInterface;
 use WiserBrand\RealThanks\Model\RtGiftFactory;
+
 
 class RtGiftRepository implements \WiserBrand\RealThanks\Api\RtGiftRepositoryInterface
 {
@@ -96,7 +97,7 @@ class RtGiftRepository implements \WiserBrand\RealThanks\Api\RtGiftRepositoryInt
     /**
      * @inheritDoc
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResult
+    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
     {
         /** @var Collection $collection */
         $collection = $this->resultCollectionFactory->create();

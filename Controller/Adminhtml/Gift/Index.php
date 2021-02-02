@@ -3,14 +3,10 @@ declare(strict_types=1);
 
 namespace WiserBrand\RealThanks\Controller\Adminhtml\Gift;
 
-use Magento\Framework\App\ResponseInterface;
-
 class Index extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpGetActionInterface
 {
     /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
+     * @inheritdoc
      */
     const ADMIN_RESOURCE = 'WiserBrand_RealThanks::rt_admin';
 

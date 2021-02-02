@@ -4,14 +4,24 @@ declare(strict_types=1);
 namespace WiserBrand\RealThanks\Model\RealThanks;
 
 use Magento\Framework\HTTP\Client\Curl;
+use Psr\Log\LoggerInterface;
+use WiserBrand\RealThanks\Exception\RtApiException;
 use WiserBrand\RealThanks\Helper\Config;
 use WiserBrand\RealThanks\Model\RtGiftRepository;
+use WiserBrand\RealThanks\Model\RtOrderRepository;
 
 class Adapter
 {
     const ORDER_RESPONSE_STATUS_KEY = 'status';
-    //@todo change to live after testing
+    //@todo change to live URL after testing
     const BASE_API_URL = 'https://api.iced.me/v1/client/';
+
+    const ORDER_ERROR_STATUSES = [
+        422 => 'Please check your RealThanks limit',
+        442 => 'You tried to send gift that is out-of-stock',
+        444 => 'Please synchronize gifts, your data (price) is outdated',
+        445 => 'Your balance is not enough for sending this order'
+    ];
     /**
      * @var Curl
      */
@@ -28,15 +38,29 @@ class Adapter
     private $giftRepo;
 
     /**
+     * @var RtOrderRepository
+     */
+    private $giftOrderRepo;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @param Curl $curl
      * @param Config $configHelper
      * @param RtGiftRepository $giftRepo
+     * @param RtOrderRepository $giftOrderRepo
+     * @param LoggerInterface $logger
      */
-    public function __construct(Curl $curl, Config $configHelper, RtGiftRepository $giftRepo)
+    public function __construct(Curl $curl, Config $configHelper, RtGiftRepository $giftRepo, RtOrderRepository $giftOrderRepo, LoggerInterface $logger)
     {
         $this->curl = $curl;
         $this->configHelper = $configHelper;
         $this->giftRepo = $giftRepo;
+        $this->giftOrderRepo = $giftOrderRepo;
+        $this->logger = $logger;
     }
 
     private function init()
@@ -47,14 +71,18 @@ class Adapter
 
     public function getGifts() : array
     {
-        //@todo add own exceptions?
-        //@todo add checkup on status
-        $result = [];
         $this->init();
         $this->curl->get(self::BASE_API_URL . 'product');
-        $response = json_decode($this->curl->getBody(), true);
-        if ($response && is_array($response) && key_exists('data', $response)) {
-            $result = $response['data'];
+        if ($this->curl->getStatus() === 200) {
+            $response = json_decode($this->curl->getBody(), true);
+            if ($response && is_array($response) && key_exists('data', $response)) {
+                $result = $response['data'];
+            } else {
+                $strResponse = implode(' ,', $response);
+                throw new RtApiException(__('Incorrect response - %1', $strResponse));
+            }
+        } else {
+            throw new RtApiException(__('Unknown API error. The response status - %1', $this->curl->getStatus()));
         }
 
         return $result;
@@ -71,24 +99,68 @@ class Adapter
 
     public function getBalance() : float
     {
-        $result = 0;
         $this->init();
         $this->curl->get(self::BASE_API_URL . 'balance');
-        $response = json_decode($this->curl->getBody(), true);
-        if ($response && is_array($response)
-            && key_exists('data', $response)
-            && key_exists('balance', $response['data'])) {
-            $result = $response['data']['balance'];
+        if ($this->curl->getStatus() === 200) {
+            $response = json_decode($this->curl->getBody(), true);
+            if ($response && is_array($response)
+                && key_exists('data', $response)
+                && key_exists('balance', $response['data'])) {
+                $result = $response['data']['balance'];
+            } else {
+                $strResponse = implode(' ,', $response);
+                throw new RtApiException(__('Incorrect response - %1', $strResponse));
+            }
+        } else {
+            throw new RtApiException(__('Unknown API error. The response status - %1', $this->curl->getStatus()));
         }
 
         return (float) $result;
     }
 
-    public function sendGift(int $giftId) : bool
+    public function sendGift(int $giftOrderId) : bool
     {
-        $giftModel = $this->giftRepo->getById($giftId);
-        // prepare data for RT from $giftModel
+        $this->init();
+        $orderModel = $this->giftOrderRepo->getById($giftOrderId);
+        $giftModel = $this->giftRepo->getById((int)$orderModel->getGiftId());
+        $data['email'] = $orderModel->getEmail();
+        $data['subject'] = $orderModel->getSubject();
+        $data['message'] = $orderModel->getMessage();
+        $data['product_id'] = $giftModel->getRtId();
+        $data['price'] = $giftModel->getCost();
+        $data['payment_type'] = 'balance';
+
+        $this->curl->post(self::BASE_API_URL . 'order', json_encode($data));
+        if ($this->curl->getStatus() === 200) {
+            $response = json_decode($this->curl->getBody(), true);
+            if ($response && is_array($response)
+                && key_exists('data', $response)
+                && key_exists('order_id', $response['data'])) {
+                $id = $response['data']['order_id'];
+                $orderModel->setRtId($id);
+                $orderModel->setStatus('Sent');
+                $this->giftOrderRepo->save($orderModel);
+            } else {
+                $strResponse = implode(' ,', $response);
+                $this->logger->error("RealThanks sendGift method. Incorrect response - {$strResponse}");
+                throw new RtApiException(__('RealThanks return incorrect response. Please check logs for the details.'));
+            }
+        } else {
+            $this->handleSendGiftErrorResponse();
+        }
 
         return true;
+    }
+
+    private function handleSendGiftErrorResponse() : void
+    {
+        if (key_exists($this->curl->getStatus(), self::ORDER_ERROR_STATUSES)) {
+            throw new RtApiException(__(self::ORDER_ERROR_STATUSES[$this->curl->getStatus()]));
+        }
+
+        $status = $this->curl->getStatus();
+        $this->logger->error("RealThanks sendGift method. Incorrect response status - {$status}");
+
+        throw new RtApiException(__('Unknown API error! Please check logs for the details.'));
     }
 }

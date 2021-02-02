@@ -40,7 +40,7 @@ class RtGift extends AbstractModel implements RtGiftInterface
 
     public function getRtId(): int
     {
-        return $this->getData(self::RT_ID);
+        return (int) $this->getData(self::RT_ID);
     }
 
     /**
@@ -48,7 +48,7 @@ class RtGift extends AbstractModel implements RtGiftInterface
      */
     public function getCost(): float
     {
-        return $this->getData(self::COST);
+        return (float) $this->getData(self::COST);
     }
 
     public function getImageUrl(): string

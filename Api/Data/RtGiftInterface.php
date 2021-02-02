@@ -1,6 +1,7 @@
 <?php
 
 namespace WiserBrand\RealThanks\Api\Data;
+
 /**
  * @package WiserBrand\RealThanks\Api\Data
  */
@@ -22,6 +23,11 @@ interface RtGiftInterface
     public function getId();
 
     /**
+     * @return mixed
+     */
+    public function getRtId();
+
+    /**
      * @return string
      */
     public function getName() : string;
@@ -35,5 +41,4 @@ interface RtGiftInterface
      * @return float
      */
     public function getCost() : float;
-
 }

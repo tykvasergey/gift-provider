@@ -1,6 +1,7 @@
 <?php
 
 namespace WiserBrand\RealThanks\Api\Data;
+
 /**
  * @package WiserBrand\RealThanks\Api\Data
  */
@@ -37,4 +38,8 @@ interface RtOrderInterface
      */
     public function getSubject() : string;
 
+    /**
+     * @return string
+     */
+    public function getMessage() : string;
 }

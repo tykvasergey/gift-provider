@@ -1,0 +1,25 @@
+<form data-mage-init='{"validation": {}}' id="send-gift-form-<%- gift_id %>" method="post" enctype="multipart/form-data" action="<%- form_action %>">
+    <input type="hidden" name="form_key" value="<%- form_key %>">
+    <div class="modal-body">
+        <div class="bootbox-body">
+            <div class="required email">
+                <label class="label"><span><%- email_label %></span><input type="text" name="email" value="" data-validate="{required:true, 'validate-email':true}"></label>
+            </div>
+            <div class="required">
+                <label class="label"><span><%- subject_label %></span><input type="text" name="subject" value="" data-validate="{required:true}"></label>
+            </div>
+            <div class="required">
+                <label class="label"><span><%- message_label %></span>
+                    <textarea class="bootbox-input bootbox-input-text form-control required-entry" name="message" rows="4" cols="83" data-validate="{required:true}"></textarea>
+                </label>
+            </div>
+            <input type="hidden" name="gift_id" value="<%- gift_id %>">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="error"></span>
+        <button type="reset" class="btn btn-default"><span><%- cancel_label %></span></button>
+        <button type="submit" class="btn btn-primary"><span><%- submit_label %></span></button>
+        <span class="clear"></span>
+    </div>
+</form>
