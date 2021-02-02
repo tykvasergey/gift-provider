@@ -1,11 +1,10 @@
 <?php
 namespace WiserBrand\RealThanks\Model;
 
-use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\CollectionFactory;
-use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\Collection;
 use Magento\Framework\DataObject;
 use WiserBrand\RealThanks\Model\ResourceModel\SyncLog as SyncLogResourceModel;
-use WiserBrand\RealThanks\Model\SyncLogFactory;
+use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\Collection;
+use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\CollectionFactory;
 
 class SyncLogManagement
 {
@@ -48,6 +47,30 @@ class SyncLogManagement
         $collection->setPageSize(1);
 
         return count($collection) ? $collection->getFirstItem() : false;
+    }
+
+    /**
+     * @return DataObject | bool
+     * @todo use instead of getLatestSync in Updater block and template
+     */
+    public function getLatestErrorSync()
+    {
+        $syncTypes = [SyncLog::GIFT_LOG_TYPE, SyncLog::BALANCE_LOG_TYPE, SyncLog::ORDER_LOG_TYPE];
+        /** @var Collection $collection */
+        $collection = $this->collectionFactory->create();
+        foreach ($syncTypes as $syncType) {
+            $collection->clear();
+            $collection->addFieldToFilter('success', false);
+            $collection->addFieldToFilter('type', SyncLog::GIFT_LOG_TYPE);
+            $collection->addOrder('creation_time', Collection::SORT_ORDER_DESC);
+            $collection->setPageSize(1);
+
+            if (count($collection)) {
+                return $collection->getFirstItem();
+            }
+        }
+
+        return false;
     }
 
     public function getBalance()
