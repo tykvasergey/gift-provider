@@ -32,19 +32,18 @@
 <button name="load_data" onclick="return updateData();"><?php echo __('Update RealThanks data') ?></button>
 <?php
 $balance = __('Current account balance - %1', $block->getCurrentBalance());
-if ($block->getSyncLogDate() === null) {
+if ($block->getLatestSyncLogDate() === null) {
     $class = 'message-notice';
     $message = __('No previous synchronizations with RealThanks found');
 } else {
     if ($block->isSuccessful()) {
         $class = 'message-success';
-        $message = __('Last synchronization at %1 UTC was successful', $block->getSyncLogDate());
+        $message = __('Last synchronization at %1 UTC was successful', $block->getLatestSyncLogDate());
     } else {
         $class = 'message-error';
-        $message = __('Last synchronizations at %1 UTC was failed: %2', $block->getSyncLogDate(), $block->getErrorMessage());
+        $message = __('Last %1 synchronization at %2 UTC was failed: %3', $block->getLogErrorType(), $block->getLogErrorDate(), $block->getLogErrorMessage());
     }
 }
-// @todo rename ccs classes
 ?>
 <div class="message <?php echo $class ?>" data-ui-id="sync-status"><?php echo $message ?></div>
 <div class="message message-balance" ><?php echo $balance ?></div>

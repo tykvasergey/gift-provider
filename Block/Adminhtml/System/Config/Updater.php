@@ -62,7 +62,7 @@ class Updater extends Field
     /**
      * @return string|null
      */
-    public function getSyncLogDate()
+    public function getLatestSyncLogDate()
     {
         if ($syncLog = $this->syncLogManagement->getLatestSync()) {
             return $syncLog->getCreatedAt();
@@ -71,25 +71,29 @@ class Updater extends Field
         return null;
     }
 
+    private function loadData() {
+        if ($syncLog = $this->syncLogManagement->getLatestErrorSync()) {
+            $this->setLogErrorDate($syncLog->getCreatedAt());
+            $this->setLogErrorType($syncLog->getType());
+            $this->setLogStatus(false);
+            $this->setLogErrorMessage($syncLog->getMessage());
+        } else {
+            $this->setLogStatus(true);
+        }
+    }
+
     /**
      * @return bool
      */
     public function IsSuccessful()
     {
-        if ($syncLog = $this->syncLogManagement->getLatestSync()) {
-            return $syncLog->IsSuccessful();
+        if ($this->getLogStatus() === null) {
+            $this->loadData();
         }
 
-        return false;
+        return $this->getLogStatus();
     }
 
-    /**
-     * @return string
-     */
-    public function getErrorMessage()
-    {
-        return $this->syncLogManagement->getLatestSync()->getMessage();
-    }
 
     /**
      * @return float

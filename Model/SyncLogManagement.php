@@ -51,7 +51,6 @@ class SyncLogManagement
 
     /**
      * @return DataObject | bool
-     * @todo use instead of getLatestSync in Updater block and template
      */
     public function getLatestErrorSync()
     {
@@ -60,13 +59,15 @@ class SyncLogManagement
         $collection = $this->collectionFactory->create();
         foreach ($syncTypes as $syncType) {
             $collection->clear();
-            $collection->addFieldToFilter('success', false);
-            $collection->addFieldToFilter('type', SyncLog::GIFT_LOG_TYPE);
+            $collection->addFieldToFilter('type', $syncType);
             $collection->addOrder('creation_time', Collection::SORT_ORDER_DESC);
             $collection->setPageSize(1);
 
             if (count($collection)) {
-                return $collection->getFirstItem();
+                $syncLog = $collection->getFirstItem();
+                if (!$syncLog->IsSuccessful()) {
+                    return $syncLog;
+                }
             }
         }
 
