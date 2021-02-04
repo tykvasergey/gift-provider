@@ -6,6 +6,9 @@
                 <enabled>0</enabled>
                 <key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
             </api>
+            <cron_settings>
+                <schedule>0 0 * * *</schedule>
+            </cron_settings>
         </realthanks>
     </default>
 </config>

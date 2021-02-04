@@ -20,6 +20,12 @@
             <argument name="syncList" xsi:type="object">FullSynchronizerList</argument>
         </arguments>
     </type>
+
+    <type name="WiserBrand\RealThanks\Cron\DataSynchronization">
+        <arguments>
+            <argument name="syncList" xsi:type="object">FullSynchronizerList</argument>
+        </arguments>
+    </type>
     <!--  Synchronizer settings  END -->
 
     <!--  Data provider settings  START -->

@@ -27,6 +27,7 @@ class Config extends AbstractHelper
     }
 
     /**
+     * @todo add this condition to send controller and adapter
      * @return bool
      */
     public function isApiEnabled(): bool

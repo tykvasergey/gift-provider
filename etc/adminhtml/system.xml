@@ -1,14 +1,17 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="wiserbrand" translate="label" sortOrder="600">
             <label>WISER BRAND</label>
         </tab>
-        <section id="realthanks" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="realthanks" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
             <label>Real Thanks</label>
             <tab>wiserbrand</tab>
             <resource>WiserBrand_RealThanks::rt_admin</resource>
-            <group id="api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
                 <comment>
                     <![CDATA[
                       <a href="https://realthanks.com/" target="_blank">Real Thanks application</a>
@@ -16,21 +19,45 @@
                     ]]>
                 </comment>
                 <label>API</label>
-                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="0" showInWebsite="0">
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="0"
+                       showInWebsite="0">
                     <label>Enabled</label>
-                    <comment><![CDATA[Don't have an API user? Find out about <a href="https://api.iced.me/doc/getting-started-with-the-api/" target="_blank">getting started with the Real Thanks API</a>.]]></comment>
+                    <comment>
+                        <![CDATA[Don't have an API user? Find out about <a href="https://api.iced.me/doc/getting-started-with-the-api/" target="_blank">getting started with the Real Thanks API</a>.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                <field id="key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0"
+                       showInStore="0" canRestore="0">
                     <label>API Key</label>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
-                <field id="load_realthank_data" translate="button_label" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="load_realthank_data" translate="button_label" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
                     <button_label>Update Real Thank Data</button_label>
                     <frontend_model>WiserBrand\RealThanks\Block\Adminhtml\System\Config\Updater</frontend_model>
+                </field>
+            </group>
+            <group id="cron_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Cron synchronization schedule</label>
+                <field id="schedule" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Schedule</label>
+                    <comment><![CDATA[
+                            <pre>
+                            * * * * *
+                            | | | | |
+                            | | | | +---- Day of the Week   (range: 1-7, 1 standing for Monday)
+                            | | | +------ Month of the Year (range: 1-12)
+                            | | +-------- Day of the Month  (range: 1-31)
+                            | +---------- Hour              (range: 0-23)
+                            +------------ Minute            (range: 0-59)
+                            Example: 0 0 * * * Daily at midnight
+                            </pre>
+                            ]]></comment>
                 </field>
             </group>
         </section>
