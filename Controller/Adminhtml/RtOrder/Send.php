@@ -66,6 +66,10 @@ class Send extends Action implements HttpGetActionInterface
             $orderModel->setStatus('Sent');
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             $this->messageManager->addSuccessMessage(__("Your gift was successfully sent. Your order id is - %1", $orderId));
+            $this->_eventManager->dispatch(
+                'wiser_brand_rt_after_gift_send',
+                ['order_model' => $orderModel]
+            );
         } catch (RtApiException $e) {
             $this->messageManager->addErrorMessage(__("The gift can`t be send now! Your order id is - %1. RealThanks API error is - %2", $orderId, $e->getMessage()));
             $orderModel->setStatus('Error');
