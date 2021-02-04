@@ -13,7 +13,6 @@
             data: {},
             url: '<?php echo /* @escapeNotVerified */ $block->getDataUpdaterUrl() ?>',
             success: function (result, status) {
-                debugger;
                 if (result.ajaxExpired) {
                     window.location = result.ajaxRedirect;
                 } else {

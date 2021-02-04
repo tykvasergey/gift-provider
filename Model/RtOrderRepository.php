@@ -144,13 +144,16 @@ class RtOrderRepository implements \WiserBrand\RealThanks\Api\RtOrderRepositoryI
 
     /**
      * returns non-complete orders that has rt_order_id (it means that they are were sent to RT)
-     * will use in the order sync
      * @return RtOrderInterface[]
      */
     public function getActiveOrders():array
     {
-        //@todo
-        return [];
+        /** @var Collection $collection */
+        $collection = $this->resultCollectionFactory->create();
+        $collection->addFieldToFilter('is_complete', 0);
+        $collection->addFieldToFilter('rt_order_id', ['notnull' => true]);
+
+        return $collection->getItems();
     }
 
     public function getGiftAttributeById(string $attribute, $orderId)

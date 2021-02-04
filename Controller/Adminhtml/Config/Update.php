@@ -51,7 +51,7 @@ class Update extends Action implements HttpGetActionInterface
             }
             $result->success = true;
         } catch (\Exception $e) {
-            $this->logger->critical($e->getMessage());
+            $this->logger->error($e->getMessage());
             $this->getResponse()->setStatusHeader(500, null, __('Cannot update data'));
             $result->error = __('Cannot update data');
         }

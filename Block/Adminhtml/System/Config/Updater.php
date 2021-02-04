@@ -38,7 +38,7 @@ class Updater extends Field
     }
 
     /**
-     * Get backend URL to load realthanks config data
+     * Get backend URL to load RealThanks config data
      *
      * @return string
      */

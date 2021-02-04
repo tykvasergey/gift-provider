@@ -52,7 +52,6 @@ class Send extends Action implements HttpGetActionInterface
 
     /**
      * @inheritDoc
-     * will also use by resend button from rt_order grid
      */
     public function execute()
     {
@@ -91,7 +90,7 @@ class Send extends Action implements HttpGetActionInterface
     private function validateOrder(RtOrder $orderModel): void
     {
         if ($orderModel->getRtId()) {
-            throw new LocalizedException(__("Order (id = %1) was already send. It can`t be send again."));
+            throw new LocalizedException(__("Order (id = %1) was already send. It can`t be send again.", $orderModel->getId()));
         }
     }
 }

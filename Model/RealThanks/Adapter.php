@@ -12,7 +12,9 @@ use WiserBrand\RealThanks\Model\RtOrderRepository;
 
 class Adapter
 {
-    const ORDER_RESPONSE_STATUS_KEY = 'status';
+    //const ORDER_RESPONSE_STATUS_KEY = 'status';
+    const ORDER_COMPLETE_STATUS = 'Completed';
+
     //@todo change to live URL after testing
     const BASE_API_URL = 'https://api.iced.me/v1/client/';
 
@@ -90,13 +92,25 @@ class Adapter
         return $result;
     }
 
-    public function getOrderStatus(int $orderId) : array
+    public function getOrderStatus(int $orderId) : string
     {
-        return [
-        "id" =>  1,
-        self::ORDER_RESPONSE_STATUS_KEY => "Created",
-        "details_status" => "Created"
-        ];
+        $this->init();
+        $this->curl->get(self::BASE_API_URL . "order/{$orderId}");
+        if ($this->curl->getStatus() === 200) {
+            $response = json_decode($this->curl->getBody(), true);
+            if ($response && is_array($response)
+                && key_exists('data', $response)
+                && key_exists('status', $response['data'])) {
+                $result = $response['data']['status'];
+            } else {
+                $strResponse = implode(' ,', $response);
+                throw new RtApiException(__('Incorrect response - %1', $strResponse));
+            }
+        } else {
+            throw new RtApiException(__('Unknown API error. The response status - %1', $this->curl->getStatus()));
+        }
+
+        return $result;
     }
 
     public function getBalance() : float

@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace WiserBrand\RealThanks\Model\RealThanks\Sync;
 
 use WiserBrand\RealThanks\Model\RealThanks\Adapter;
-use WiserBrand\RealThanks\Model\RtGiftRepository;
 use WiserBrand\RealThanks\Model\RtOrder;
 use WiserBrand\RealThanks\Model\RtOrderRepository;
+use WiserBrand\RealThanks\Model\SyncLog;
+use WiserBrand\RealThanks\Model\SyncLogManagement;
 
 class OrderSynchronizer implements SynchronizerInterface
 {
@@ -20,6 +21,10 @@ class OrderSynchronizer implements SynchronizerInterface
      */
     private $adapter;
 
+    /**
+     * @var SyncLogManagement
+     */
+    private $syncLogManagement;
 
     /**
      * @var array
@@ -30,9 +35,13 @@ class OrderSynchronizer implements SynchronizerInterface
      * @param RtOrderRepository $rtOrderRepository
      * @param Adapter $adapter
      */
-    public function __construct(RtOrderRepository $rtOrderRepository, Adapter $adapter)
-    {
+    public function __construct(
+        RtOrderRepository $rtOrderRepository,
+        Adapter $adapter,
+        SyncLogManagement $syncLogManagement
+    ) {
         $this->rtOrderRepository = $rtOrderRepository;
+        $this->syncLogManagement = $syncLogManagement;
         $this->adapter = $adapter;
     }
 
@@ -43,16 +52,31 @@ class OrderSynchronizer implements SynchronizerInterface
 
     public function synchronize(): bool
     {
-        $this->init();
+        $result = true;
+        $logData = [
+            'success' => false,
+            'type' => SyncLog::ORDER_LOG_TYPE
+        ];
 
-        /** @var RtOrder $rtOrder */
-        foreach ($this->rtOrdersToUpdate as $rtOrder) {
-            $orderStatusArr = $this->adapter->getOrderStatus($rtOrder->getRtId());
-            $rtOrder->setStatus($orderStatusArr[Adapter::ORDER_RESPONSE_STATUS_KEY]);
-
-            $this->rtOrderRepository->save($rtOrder);
+        try {
+            $this->init();
+            /** @var RtOrder $rtOrder */
+            foreach ($this->rtOrdersToUpdate as $rtOrder) {
+                $orderStatus = $this->adapter->getOrderStatus($rtOrder->getRtId());
+                $rtOrder->setStatus($orderStatus);
+                if ($orderStatus == Adapter::ORDER_COMPLETE_STATUS) {
+                    $rtOrder->setIsComplete(true);
+                }
+                $this->rtOrderRepository->save($rtOrder);
+            }
+            $logData['success'] = true;
+            $this->syncLogManagement->addSyncLog($logData);
+        } catch (\Exception $exception) {
+            $logData['message'] = $exception->getMessage();
+            $this->syncLogManagement->addSyncLog($logData);
+            $result = false;
         }
 
-        return true;
+        return $result;
     }
 }
