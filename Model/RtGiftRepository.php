@@ -97,7 +97,7 @@ class RtGiftRepository implements \WiserBrand\RealThanks\Api\RtGiftRepositoryInt
     /**
      * @inheritDoc
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
+    public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /** @var Collection $collection */
         $collection = $this->resultCollectionFactory->create();

@@ -6,6 +6,7 @@ namespace WiserBrand\RealThanks\Controller\Adminhtml\RtOrder;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Psr\Log\LoggerInterface;
@@ -56,7 +57,6 @@ class Send extends Action implements HttpGetActionInterface
     public function execute()
     {
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-
         $orderId = (int) $this->getRequest()->getParam('order_id');
         try {
             $orderModel = $this->giftOrderRepo->getById($orderId);
@@ -87,6 +87,13 @@ class Send extends Action implements HttpGetActionInterface
         }
 
         $this->giftOrderRepo->save($orderModel);
+
+        if ($this->getRequest()->isAjax()) {
+            /** @var Json $resultJson */
+            $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+            $resultJson->setData(['status' => $orderModel->getStatus()]);
+            return $resultJson;
+        }
 
         return $resultRedirect;
     }

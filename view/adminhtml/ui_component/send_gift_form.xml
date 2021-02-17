@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">send_gift_form.send_gift_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Send gift</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>send_gift_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>send_gift_form.send_gift_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="send_gift_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="realthanks/rtorder/create"/>
+        </settings>
+<!--        <aclResource>Magento_Customer::manage</aclResource>-->
+        <dataProvider class="WiserBrand\RealThanks\Ui\DataProvider\SendGift\DataProvider" name="send_gift_form_data_source">
+            <settings>
+                <requestFieldName>form_id</requestFieldName>
+                <primaryFieldName>form_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+            <dataScope/>
+        </settings>
+
+        <field name="gift_id"
+               formElement="select" sortOrder="5">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Real Thanks gift</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="WiserBrand\RealThanks\Model\Source\RtGiftSource"/>
+                        <!--                        <filterBy>-->
+                        <!--                            <field>country_id</field>-->
+                        <!--                            <target>${ $.provider }:${ $.parentScope }.country_id</target>-->
+                        <!--                        </filterBy>-->
+                        <!--                        <customEntry>region</customEntry>-->
+
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="email" sortOrder="10" formElement="email">
+            <settings>
+                <label translate="true">Recipient</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-email" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="subject" sortOrder="20" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <label translate="true">Subject</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="message" formElement="textarea" sortOrder="30">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Message</label>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <button name="send_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+<!--                    <item name="buttonClasses" xsi:type="string">custom-button-class</item>-->
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">send_gift_form.send_gift_form</item>
+                            <item name="actionName" xsi:type="string">save</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <displayAsLink>false</displayAsLink>
+                <title translate="true">Send</title>
+            </settings>
+        </button>
+
+
+    </fieldset>
+</form>

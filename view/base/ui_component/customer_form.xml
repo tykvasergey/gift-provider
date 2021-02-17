@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <settings>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!--    <settings>-->
+    <!--        <buttons>-->
+    <!--            <button name="back" class="Magento\Customer\Block\Adminhtml\Edit\BackButton"/>-->
+    <!--        </buttons>-->
 
-    </settings>
+    <!--    </settings>-->
     <fieldset name="realthanks">
         <settings>
             <collapsible>false</collapsible>
             <label translate="true">Associated RealThanks gifts</label>
             <componentType>fieldset</componentType>
         </settings>
-
+        <button name="modal_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="title" xsi:type="string">Send gift</item>
+                    <item name="actions" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="targetName" xsi:type="string">${ $.parentName}.send_gift_modal</item>
+                            <item name="actionName" xsi:type="string">openModal</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </button>
         <insertListing name="rt_order_grid_list">
             <settings>
                 <dataLinks>
-                    <exports>false</exports>
+                    <exports>true</exports>
                     <imports>true</imports>
                 </dataLinks>
                 <externalProvider>rt_order_grid_list.grid_order_list_data_source</externalProvider>
@@ -30,5 +46,42 @@
                 </imports>
             </settings>
         </insertListing>
-           </fieldset>
+
+        <modal name="send_gift_modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">Send gift</option>
+                </options>
+            </settings>
+            <insertForm name="send_gift_form_loader" sortOrder="2010" component="WiserBrand_RealThanks/js/form/components/insert-send-gift-form">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <!--                                    <item name="addressListingProvider" xsi:type="string">ns = customer_address_listing, index = customer_address_listing</item>-->
+                        <item name="giftModalProvider" xsi:type="string">${ $.parentName }</item>
+                        <item name="ownerComponent" xsi:type="string">ns = customer_form</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render">
+                        <param name="handle">send_gift_form</param>
+                        <param name="buttons">1</param>
+                        <param name="form_id">0</param>
+                    </renderUrl>
+                    <loading>true</loading>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <externalProvider>send_gift_form.send_gift_form_data_source</externalProvider>
+                    <ns>send_gift_form</ns>
+<!--                    <exports>-->
+<!--                        <link name="customer_email">${ $.externalProvider }:data.email</link>-->
+<!--                    </exports>-->
+                    <imports>
+                        <link name="customer_email">${ $.provider}:data.customer.email</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+    </fieldset>
+
 </form>

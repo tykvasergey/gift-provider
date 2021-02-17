@@ -6,7 +6,7 @@ define([
     'mage/translate',
     'Magento_Ui/js/modal/modal',
     'mage/cookies'
-], function (Column, $, mageTemplate, sendmailPreviewTemplate, $t) {
+], function (Column, $, mageTemplate, sendGiftFormTemplate, $t) {
     'use strict';
 
     return Column.extend({
@@ -51,7 +51,7 @@ define([
         },
         preview: function (row) {
             let modalHtml = mageTemplate(
-                sendmailPreviewTemplate,
+                sendGiftFormTemplate,
                 {
                     title: this.getTitle(),
                     label: this.getLabel(),
@@ -62,9 +62,7 @@ define([
                     email_label: this.getEmailLabel(),
                     message_label: this.getMessageLabel(),
                     subject_label: this.getSubjectLabel(),
-                    //form_key: $.mage.cookies.get('form_key'),
-                    form_key: this.getFormKey(row),
-                    linkText: $.mage.__('Go to Details Page') //? what is it
+                    form_key: this.getFormKey(row)
                 }
             );
             let previewPopup = $('<div/>').html(modalHtml);

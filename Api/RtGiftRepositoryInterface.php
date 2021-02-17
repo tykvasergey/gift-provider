@@ -19,7 +19,7 @@ interface RtGiftRepositoryInterface
      * @return \Magento\Framework\Api\Search\SearchResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria);
 
     /**
      * Retrieve RT Gift.

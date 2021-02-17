@@ -42,12 +42,10 @@ class DataProvider extends AbstractDataProvider
     {
         /** @var GridCollection $collection */
         $collection = $this->getCollection();
-        $data['items'] = [];
         if ($this->request->getParam('email')) {
             $collection->addFieldToFilter('email', $this->request->getParam('email'));
-            $data = $collection->toArray();
         }
 
-        return $data;
+        return $collection->toArray();
     }
 }

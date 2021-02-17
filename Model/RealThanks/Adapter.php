@@ -145,6 +145,7 @@ class Adapter
         $data['product_id'] = $giftModel->getRtId();
         $data['price'] = $giftModel->getCost();
         $data['payment_type'] = 'balance';
+        $data['source'] = 'magento';
 
         $this->curl->post(self::BASE_API_URL . 'order', json_encode($data));
         if ($this->curl->getStatus() === 200) {
