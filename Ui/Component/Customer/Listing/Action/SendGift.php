@@ -1,41 +1,12 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\Gift\Listing\Action;
+namespace WiserBrand\RealThanks\Ui\Component\Customer\Listing\Action;
 
-use Magento\Framework\Data\Form\FormKey;
-use Magento\Framework\UrlInterface;
-use Magento\Framework\View\Element\UiComponent\ContextInterface;
-use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-class SendGiftBtn extends Column
+class SendGift extends Column
 {
     /**
-     * @var UrlInterface
-     */
-    private $urlBuilder;
-    /**
-     * @var FormKey
-     */
-    private $formKey;
-
-    public function __construct(
-        ContextInterface $context,
-        UiComponentFactory $uiComponentFactory,
-        UrlInterface $urlBuilder,
-        FormKey $formKey,
-        array $components = [],
-        array $data = []
-    ) {
-        $this->urlBuilder = $urlBuilder;
-        $this->formKey = $formKey;
-        parent::__construct($context, $uiComponentFactory, $components, $data);
-    }
-
-    /**
-     * Prepare Data Source
-     *
-     * @param array $dataSource
-     * @return array
+     * @inheritDoc
      */
     public function prepareDataSource(array $dataSource)
     {
@@ -45,7 +16,6 @@ class SendGiftBtn extends Column
             return $dataSource;
         }
 
-        $fieldName = $this->getData('name');
         foreach ($dataSource['data']['items'] as & $item) {
             $item[$this->getData('name')]['details'] = [
                 'callback' => [
@@ -68,7 +38,7 @@ class SendGiftBtn extends Column
                     ]
                 ],
                 'href' => '#',
-                'label' => __('Send gift'),
+                'label' => __('Send gift')
             ];
         }
 

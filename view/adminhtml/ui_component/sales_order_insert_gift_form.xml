@@ -1,0 +1,75 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">sales_order_insert_gift_form.sales_order_insert_gift_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Send gift</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <dataSource name="sales_order_insert_gift_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+
+        <dataProvider class="WiserBrand\RealThanks\Ui\DataProvider\SendGift\DataProvider" name="sales_order_insert_gift_form_data_source">
+            <settings>
+                <requestFieldName>form_id</requestFieldName>
+                <primaryFieldName>form_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+
+    </dataSource>
+
+<!--    <button name="modal_button">-->
+<!--        <argument name="data" xsi:type="array">-->
+<!--            <item name="config" xsi:type="array">-->
+<!--                <item name="title" xsi:type="string">Send gift</item>-->
+<!--                <item name="actions" xsi:type="array">-->
+<!--                    <item name="0" xsi:type="array">-->
+<!--                        <item name="targetName" xsi:type="string">${ $.parentName}.send_gift_modal</item>-->
+<!--                        <item name="actionName" xsi:type="string">openModal</item>-->
+<!--                    </item>-->
+<!--                </item>-->
+<!--            </item>-->
+<!--        </argument>-->
+<!--    </button>-->
+    <modal name="send_gift_modal">
+        <settings>
+            <options>
+                <option name="modalClass" xsi:type="string">insert-gift-form-modal</option>
+                <option name="title" xsi:type="string" translate="true">Send gift</option>
+            </options>
+        </settings>
+        <insertForm name="send_gift_form_loader" sortOrder="2010" component="WiserBrand_RealThanks/js/form/components/insert-send-gift-form">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!--                                    <item name="addressListingProvider" xsi:type="string">ns = customer_address_listing, index = customer_address_listing</item>-->
+                    <item name="giftModalProvider" xsi:type="string">${ $.parentName }</item>
+                    <item name="ownerComponent" xsi:type="string">ns = customer_form</item>
+                </item>
+            </argument>
+            <settings>
+                <formSubmitType>ajax</formSubmitType>
+                <renderUrl path="mui/index/render">
+                    <param name="handle">send_gift_form</param>
+                    <param name="buttons">1</param>
+                    <param name="form_id">0</param>
+                </renderUrl>
+                <loading>true</loading>
+                <autoRender>true</autoRender>
+                <toolbarContainer>${ $.parentName }</toolbarContainer>
+                <externalProvider>send_gift_form.send_gift_form_data_source</externalProvider>
+                <ns>send_gift_form</ns>
+                <exports>
+                    <link name="customer_email">${ $.externalProvider }:data.email</link>
+                </exports>
+                <imports>
+                    <link name="customer_email">${ $.provider}:data.customer.email</link>
+                </imports>
+            </settings>
+        </insertForm>
+    </modal>
+</form>
