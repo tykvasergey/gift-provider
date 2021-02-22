@@ -69,6 +69,9 @@ class Adapter
 
     private function init()
     {
+        if (!$this->configHelper->isApiEnabled()) {
+            throw new RtApiException(__('RealThanks module API disabled in configuration. Please check the config node - "realthanks/api/enabled"'));
+        }
         $this->curl->addHeader("Content-Type", "application/json");
         $this->curl->addHeader("Authorization", "Bearer {$this->configHelper->getApiKey()}");
     }

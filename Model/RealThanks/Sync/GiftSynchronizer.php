@@ -90,7 +90,7 @@ class GiftSynchronizer implements SynchronizerInterface
         return $result;
     }
 
-    private function updateCreateGifts() : void
+    public function updateCreateGifts() : void
     {
         $giftRtIds = array_column($this->giftToUpdateIds, 'rtId');
         foreach ($this->rtData as $giftResponse) {
@@ -99,7 +99,7 @@ class GiftSynchronizer implements SynchronizerInterface
         }
     }
 
-    private function deleteGifts() : void
+    public function deleteGifts() : void
     {
         foreach ($this->giftToUpdateIds as $ids) {
             $gift = $this->giftRepo->getById($ids['id']);
@@ -108,9 +108,8 @@ class GiftSynchronizer implements SynchronizerInterface
         }
     }
 
-    private function convertResponseToGiftModel(array $giftRtIds, array $giftResponse) : RtGift
+    public function convertResponseToGiftModel(array $giftRtIds, array $giftResponse) : RtGift
     {
-        //@todo add exception for keys
         $id = null;
         if (($key = array_search($giftResponse['id'], $giftRtIds)) !== false) {
             $id = $this->giftToUpdateIds[$key]['id'];

@@ -39,6 +39,12 @@ class Send extends Action implements HttpGetActionInterface
      */
     private $logger;
 
+    /**
+     * @param Adapter $adapter
+     * @param RtOrderRepository $giftOrderRepo
+     * @param LoggerInterface $logger
+     * @param Context $context
+     */
     public function __construct(
         Adapter $adapter,
         RtOrderRepository $giftOrderRepo,

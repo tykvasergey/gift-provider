@@ -2,13 +2,7 @@
 
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <!--    <settings>-->
-    <!--        <buttons>-->
-    <!--            <button name="back" class="Magento\Customer\Block\Adminhtml\Edit\BackButton"/>-->
-    <!--        </buttons>-->
-
-    <!--    </settings>-->
-    <fieldset name="realthanks">
+    <fieldset name="realthanks" class="WiserBrand\RealThanks\Ui\Component\Customer\Form\Tab\AssociatedRtGifts">
         <settings>
             <collapsible>false</collapsible>
             <label translate="true">Associated RealThanks gifts</label>

@@ -1,9 +1,9 @@
 <?php
 namespace WiserBrand\RealThanks\Ui\Component\Customer\Listing\Action;
 
-use Magento\Ui\Component\Listing\Columns\Column;
+use WiserBrand\RealThanks\Ui\Component\SendGiftActionColumn;
 
-class SendGift extends Column
+class SendGift extends SendGiftActionColumn
 {
     /**
      * @inheritDoc

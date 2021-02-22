@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace WiserBrand\RealThanks\Cron;
 
+use WiserBrand\RealThanks\Helper\Config;
 use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerInterface;
 use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface;
 
@@ -14,15 +15,25 @@ class DataSynchronization
     private $syncList;
 
     /**
-     * @param SynchronizerListInterface $syncList
+     * @var Config
      */
-    public function __construct(SynchronizerListInterface $syncList)
+    private $config;
+
+    /**
+     * @param SynchronizerListInterface $syncList
+     * @param Config $config
+     */
+    public function __construct(SynchronizerListInterface $syncList, Config $config)
     {
         $this->syncList = $syncList;
+        $this->config = $config;
     }
 
     public function execute()
     {
+        if (!$this->config->isApiEnabled()) {
+            return;
+        }
         /** @var SynchronizerInterface $synchronizer */
         foreach ($this->syncList as $synchronizer) {
             $synchronizer->synchronize();

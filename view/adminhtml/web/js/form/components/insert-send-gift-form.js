@@ -49,7 +49,6 @@ define([
         onResponse: function (responseData) {
             debugger;
             if (responseData.status !== 'Error') {
-                // @todo reset form data and show errors if so
                 // this.addressListing().reload({
                 //     refresh: true
                 // });
