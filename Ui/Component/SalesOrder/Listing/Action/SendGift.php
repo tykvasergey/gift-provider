@@ -20,20 +20,18 @@ class SendGift extends SendGiftActionColumn
             $item[$this->getData('name')]['rt'] = [
                 'callback' => [
                     [
-                        'provider' => 'sales_order_grid.sales_order_grid.modalContainer'
-                            . '.send_gift_modal.send_gift_form_loader',
+                        'provider' => 'index = send_gift_form_loader',
                         'target' => 'destroyInserted',
                     ],
                     [
-                        'provider' => 'sales_order_grid.sales_order_grid.modalContainer'
-                            . '.send_gift_modal.send_gift_form_loader',
+                        'provider' => 'index = send_gift_form_loader',
                         'target' => 'updateData',
                         'params' => [
                             'email' => $item['customer_email']
                         ]
                     ],
                     [
-                        'provider' => 'sales_order_grid.sales_order_grid.modalContainer.send_gift_modal',
+                        'provider' => 'index = send_gift_modal',
                         'target' => 'openModal'
                     ]
                 ],

@@ -5,20 +5,22 @@
 
 define([
     'jquery',
+    'uiRegistry',
     'Magento_Ui/js/form/components/insert-form',
     'mageUtils',
     'underscore'
-], function ($,Insert, utils, _) {
+], function ($, registry, Insert, utils, _) {
     'use strict';
 
     return Insert.extend({
         defaults: {
             listens: {
-                responseData: 'onResponse'
+                responseData: 'onResponse',
+                responseStatus: 'onStatus'
             },
             modules: {
-                giftModalProvider: '${ $.giftModalProvider }'
-                // ownerComponent: '${ $.ownerComponent }'
+                giftModalProvider: '${ $.giftModalProvider }',
+                ownerComponent: '${ $.ownerComponent }'
             }
         },
 
@@ -47,15 +49,11 @@ define([
          * @param {Object} responseData
          */
         onResponse: function (responseData) {
-            debugger;
             if (responseData.status !== 'Error') {
-                // this.addressListing().reload({
-                //     refresh: true
-                // });
-
+                this.giftModalProvider().closeModal();
+            } else {
+                // show error msg
             }
-            this.giftModalProvider().closeModal();
-            //this.ownerComponent().reload(); - it is provider, we need a form or messageList
         }
     });
 });

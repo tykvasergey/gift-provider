@@ -13,36 +13,4 @@
             </argument>
         </actionsColumn>
     </columns>
-    <container name="modalContainer">
-    <modal name="send_gift_modal">
-        <settings>
-            <options>
-                <option name="title" xsi:type="string" translate="true">Send gift</option>
-            </options>
-        </settings>
-        <insertForm name="send_gift_form_loader" sortOrder="2010" component="WiserBrand_RealThanks/js/form/components/insert-send-gift-form">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="giftModalProvider" xsi:type="string">${ $.parentName }</item>
-<!--                    <item name="ownerComponent" xsi:type="string">ns = customer_form</item>-->
-                </item>
-            </argument>
-            <settings>
-                <formSubmitType>ajax</formSubmitType>
-                <renderUrl path="mui/index/render">
-                    <param name="handle">send_gift_form</param>
-                    <param name="buttons">1</param>
-                    <param name="form_id">0</param>
-                </renderUrl>
-                <loading>true</loading>
-                <autoRender>true</autoRender>
-                <toolbarContainer>${ $.parentName }</toolbarContainer>
-                <externalProvider>send_gift_form.send_gift_form_data_source</externalProvider>
-                <ns>send_gift_form</ns>
-                <imports>
-                </imports>
-            </settings>
-        </insertForm>
-    </modal>
-    </container>
 </listing>

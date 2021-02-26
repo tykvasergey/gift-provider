@@ -18,7 +18,7 @@ define([
         showModal: function () {
             let form = registry.get('index = send_gift_form_loader');
             let modal = registry.get('index = send_gift_modal');
-            debugger;
+
             form.updateData({'email': this.options.email});
             modal.openModal();
         }
