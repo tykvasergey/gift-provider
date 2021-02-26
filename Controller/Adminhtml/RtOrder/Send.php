@@ -62,6 +62,7 @@ class Send extends Action implements HttpGetActionInterface
      */
     public function execute()
     {
+        //@todo refactored - too long method
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $orderId = (int) $this->getRequest()->getParam('order_id');
         try {
@@ -95,9 +96,18 @@ class Send extends Action implements HttpGetActionInterface
         $this->giftOrderRepo->save($orderModel);
 
         if ($this->getRequest()->isAjax()) {
+            $type = 'success';
+            if ($orderModel->getStatus() === 'Error') {
+                $type = 'error';
+            }
+            $messages = $this->messageManager->getMessages(true)->getItemsByType($type);
+            $resultMsg = '';
+            foreach ($messages as $message) {
+                $resultMsg .= $message->getText();
+            }
             /** @var Json $resultJson */
             $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-            $resultJson->setData(['status' => $orderModel->getStatus()]);
+            $resultJson->setData(['status' => $orderModel->getStatus(), 'message' => $resultMsg]);
             return $resultJson;
         }
 

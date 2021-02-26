@@ -8,8 +8,10 @@ define([
     'uiRegistry',
     'Magento_Ui/js/form/components/insert-form',
     'mageUtils',
-    'underscore'
-], function ($, registry, Insert, utils, _) {
+    'underscore',
+    'mage/apply/main',
+    'notification'
+], function ($, registry, Insert, utils, _, mage, notification) {
     'use strict';
 
     return Insert.extend({
@@ -51,9 +53,30 @@ define([
         onResponse: function (responseData) {
             if (responseData.status !== 'Error') {
                 this.giftModalProvider().closeModal();
+
             } else {
-                // show error msg
+                // reset form
             }
+            this.showMessage(responseData);
+        },
+        showMessage: function (responseData) {
+            let giftContext = !!this.previousParams.gift_id;
+            $('body').notification('clear')
+                .notification('add', {
+                    error: responseData.status === 'Error',
+                    message: responseData.message,
+                    giftContext: giftContext,
+
+                    insertMethod: function (message) {
+                        let $wrapper = $('<div/>').html(message);
+
+                        if (this.giftContext) {
+                            $('.page-columns').before($wrapper);
+                        } else {
+                            $('.page-main-actions:first-of-type').after($wrapper);
+                        }
+                    }
+                });
         }
     });
 });
