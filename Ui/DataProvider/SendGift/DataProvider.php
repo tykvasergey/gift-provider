@@ -19,4 +19,27 @@ class DataProvider extends ElementDataProvider
 
         return [$data];
     }
+
+    public function getMeta()
+    {
+        $meta = parent::getMeta();
+        // disabled gift select for cases where this field pre-defined
+        if ($this->request->getParam('gift_id')) {
+            $meta['general'] = [
+                'children' => [
+                    'gift_id' => [
+                        'arguments' => [
+                            'data' => [
+                                'config' => [
+                                    'visible' => false
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ];
+        }
+
+        return $meta;
+    }
 }

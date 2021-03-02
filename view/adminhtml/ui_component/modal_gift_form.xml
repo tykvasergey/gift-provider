@@ -14,7 +14,7 @@
             </item>
         </argument>
 
-        <dataProvider class="WiserBrand\RealThanks\Ui\DataProvider\SendGift\DataProvider" name="modal_gift_form_data_source">
+        <dataProvider class="WiserBrand\RealThanks\Ui\DataProvider\ModalForm\DataProvider" name="modal_gift_form_data_source">
             <settings>
                 <requestFieldName>form_id</requestFieldName>
                 <primaryFieldName>form_id</primaryFieldName>

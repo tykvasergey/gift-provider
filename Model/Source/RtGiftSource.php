@@ -5,7 +5,7 @@ namespace WiserBrand\RealThanks\Model\Source;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Data\OptionSourceInterface;
-use WiserBrand\RealThanks\Api\Data\RtGiftInterface;
+use WiserBrand\RealThanks\Model\RtGift;
 use WiserBrand\RealThanks\Model\RtGiftRepository;
 
 class RtGiftSource implements OptionSourceInterface
@@ -36,10 +36,13 @@ class RtGiftSource implements OptionSourceInterface
     private function getOptions() : array
     {
         $res = [];
-        /** @var RtGiftInterface $item */
+        /** @var RtGift $item */
         foreach ($this->getGifts() as $item) {
-            // @todo get currency from config + cost format
-            $res[] = ['value' => $item->getId(), 'label' => $item->getName() . ', ' . $item->getCost() . '$'];
+            $res[] = [
+                'value' => $item->getId(),
+                'label' => $item->getName() . ', ' . $item->getCost() . '$',
+                'image' => $item->getImageUrl()
+            ];
         }
 
         return $res;
