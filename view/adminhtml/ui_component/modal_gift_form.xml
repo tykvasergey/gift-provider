@@ -7,6 +7,15 @@
         <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
+    <settings>
+        <namespace>modal_gift_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>modal_gift_form.modal_gift_form_data_source</dep>
+        </deps>
+    </settings>
     <dataSource name="modal_gift_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
