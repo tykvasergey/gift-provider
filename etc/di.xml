@@ -1,28 +1,27 @@
 <?xml version="1.0"?>
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
-    <preference for="WiserBrand\RealThanks\Api\RtGiftRepositoryInterface"
-                type="WiserBrand\RealThanks\Model\RtGiftRepository" />
-    <preference for="WiserBrand\RealThanks\Api\RtOrderRepositoryInterface"
-                type="WiserBrand\RealThanks\Model\RtOrderRepository" />
-    <preference for="WiserBrand\RealThanks\Api\Data\RtGiftInterface"
-                type="WiserBrand\RealThanks\Model\RtGift" />
-    <preference for="WiserBrand\RealThanks\Api\Data\RtOrderInterface"
-                type="WiserBrand\RealThanks\Model\RtOrder" />
+    <preference for="RealThanks\GiftProvider\Api\RtGiftRepositoryInterface"
+                type="RealThanks\GiftProvider\Model\RtGiftRepository" />
+    <preference for="RealThanks\GiftProvider\Api\RtOrderRepositoryInterface"
+                type="RealThanks\GiftProvider\Model\RtOrderRepository" />
+    <preference for="RealThanks\GiftProvider\Api\Data\RtGiftInterface"
+                type="RealThanks\GiftProvider\Model\RtGift" />
+    <preference for="RealThanks\GiftProvider\Api\Data\RtOrderInterface"
+                type="RealThanks\GiftProvider\Model\RtOrder" />
     <!--  Synchronizer settings  START -->
-    <preference for="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface" type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerList" />
+    <preference for="RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerListInterface" type="RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerList" />
     <virtualType name="FullSynchronizerList"
-                 type="WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerList"> <!--@todo why I cant use interface? -->
+                 type="RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerList">
         <arguments>
             <argument name="synchronizerList" xsi:type="array">
-                <item name="gift" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\GiftSynchronizer</item>
-                <item name="order" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\OrderSynchronizer</item>
-                <item name="balance" xsi:type="object">WiserBrand\RealThanks\Model\RealThanks\Sync\BalanceSynchronizer</item>
+                <item name="gift" xsi:type="object">RealThanks\GiftProvider\Model\Connection\Sync\GiftSynchronizer</item>
+                <item name="order" xsi:type="object">RealThanks\GiftProvider\Model\Connection\Sync\OrderSynchronizer</item>
+                <item name="balance" xsi:type="object">RealThanks\GiftProvider\Model\Connection\Sync\BalanceSynchronizer</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="WiserBrand\RealThanks\Cron\DataSynchronization">
+    <type name="RealThanks\GiftProvider\Cron\DataSynchronization">
         <arguments>
             <argument name="syncList" xsi:type="object">FullSynchronizerList</argument>
         </arguments>
@@ -30,25 +29,25 @@
     <!--  Synchronizer settings  END -->
 
     <!--  Data provider settings  START -->
-    <virtualType name="WiserBrand\RealThanks\Gift\DataProvider\SearchResult"
+    <virtualType name="RealThanks\GiftProvider\Gift\DataProvider\SearchResult"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">wiser_brand_rt_gift</argument>
-            <argument name="resourceModel" xsi:type="string">WiserBrand\RealThanks\Model\ResourceModel\RtGift</argument>
+            <argument name="mainTable" xsi:type="string">realthanks_provider_gift</argument>
+            <argument name="resourceModel" xsi:type="string">RealThanks\GiftProvider\Model\ResourceModel\RtGift</argument>
         </arguments>
     </virtualType>
-    <virtualType name="WiserBrand\RealThanks\RtOrder\DataProvider\SearchResult"
+    <virtualType name="RealThanks\GiftProvider\RtOrder\DataProvider\SearchResult"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">wiser_brand_rt_order</argument>
-            <argument name="resourceModel" xsi:type="string">WiserBrand\RealThanks\Model\ResourceModel\RtOrder</argument>
+            <argument name="mainTable" xsi:type="string">realthanks_provider_order</argument>
+            <argument name="resourceModel" xsi:type="string">RealThanks\GiftProvider\Model\ResourceModel\RtOrder</argument>
         </arguments>
     </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="grid_gift_list_data_source" xsi:type="string">WiserBrand\RealThanks\Gift\DataProvider\SearchResult</item>
-                <item name="grid_order_list_data_source" xsi:type="string">WiserBrand\RealThanks\RtOrder\DataProvider\SearchResult</item>
+                <item name="grid_gift_list_data_source" xsi:type="string">RealThanks\GiftProvider\Gift\DataProvider\SearchResult</item>
+                <item name="grid_order_list_data_source" xsi:type="string">RealThanks\GiftProvider\RtOrder\DataProvider\SearchResult</item>
             </argument>
         </arguments>
     </type>

@@ -2,7 +2,7 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
 
-    <table name="wiser_brand_rt_gift" resource="default" engine="innodb" comment="RealThanks Gift Table">
+    <table name="realthanks_provider_gift" resource="default" engine="innodb" comment="RealThanks Gift Table">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="false" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="name" nullable="false" length="40" comment="RealThanks Gift Name or Title"/>
@@ -24,7 +24,7 @@
         </constraint>
     </table>
 
-    <table name="wiser_brand_rt_order" resource="default" engine="innodb" comment="RealThanks Order Table">
+    <table name="realthanks_provider_order" resource="default" engine="innodb" comment="RealThanks Order Table">
         <column xsi:type="int" name="entity_id" padding="10" unsigned="false" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="varchar" name="email" nullable="false" length="40" comment="RealThanks Order recipient email"/>
@@ -40,14 +40,14 @@
                 comment="Original RealThanks Order ID"/>
         <column xsi:type="int" name="gift_id" padding="10" unsigned="false" nullable="false"
                 comment="Gift ID"/>
-        <constraint xsi:type="foreign" referenceId="RT_GIFT_ID" table="wiser_brand_rt_order"
-                    column="gift_id" referenceTable="wiser_brand_rt_gift" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="RT_GIFT_ID" table="realthanks_provider_order"
+                    column="gift_id" referenceTable="realthanks_provider_gift" referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
     </table>
 
-    <table name="wiser_brand_rt_sync_log" resource="default" engine="innodb">
+    <table name="realthanks_provider_sync_log" resource="default" engine="innodb">
         <column xsi:type="int" name="sync_id" unsigned="true" nullable="false" identity="true"
                 comment="Entity ID"/>
         <column xsi:type="boolean" name="success" nullable="false" default="0" comment="Is sync was successful"/>

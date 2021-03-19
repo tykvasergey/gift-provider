@@ -1,12 +1,10 @@
 <?php
 
-namespace WiserBrand\RealThanks\Model\RealThanks\Sync;
+namespace RealThanks\GiftProvider\Model\Connection\Sync;
 
 class SynchronizerList implements SynchronizerListInterface
 {
     /**
-     * List of routers
-     *
      * @var SynchronizerInterface[]
      */
     protected $synchronizerList;
@@ -28,7 +26,7 @@ class SynchronizerList implements SynchronizerListInterface
     }
 
     /**
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function next()
     {
@@ -44,8 +42,7 @@ class SynchronizerList implements SynchronizerListInterface
     }
 
     /**
-     * @return boolean The return value will be casted to boolean and then evaluated.
-     * Returns true on success or false on failure.
+     * @return boolean
      */
     public function valid()
     {
@@ -53,7 +50,7 @@ class SynchronizerList implements SynchronizerListInterface
     }
 
     /**
-     * @return void Any returned value is ignored.
+     * @return void
      */
     public function rewind()
     {

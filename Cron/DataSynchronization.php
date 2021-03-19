@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Cron;
+namespace RealThanks\GiftProvider\Cron;
 
-use WiserBrand\RealThanks\Helper\Config;
-use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerInterface;
-use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface;
+use RealThanks\GiftProvider\Helper\Config;
+use RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerInterface;
+use RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerListInterface;
 
 class DataSynchronization
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace WiserBrand\RealThanks\Api\Data;
+namespace RealThanks\GiftProvider\Api\Data;
 
 /**
- * @package WiserBrand\RealThanks\Api\Data
+ * @package RealThanks\RealThanks\Api\Data
  */
 interface RtOrderInterface
 {

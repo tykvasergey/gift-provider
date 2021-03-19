@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Ui\Component\Order\Listing;
+namespace RealThanks\GiftProvider\Ui\Component\Order\Listing;
 
 class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {

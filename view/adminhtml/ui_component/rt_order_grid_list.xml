@@ -10,7 +10,7 @@
     </argument>
     <dataSource name="grid_order_list_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">WiserBrand\RealThanks\Ui\Component\Order\Listing\DataProvider</argument>
+            <argument name="class" xsi:type="string">RealThanks\GiftProvider\Ui\Component\Order\Listing\DataProvider</argument>
             <argument name="name" xsi:type="string">grid_order_list_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
             <argument name="requestFieldName" xsi:type="string">entity_id</argument>
@@ -92,13 +92,13 @@
                 <sorting>asc</sorting>
             </settings>
         </column>
-        <column name="name" class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Columns\Name">
+        <column name="name" class="RealThanks\GiftProvider\Ui\Component\Order\Listing\Columns\Name">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Name</label>
             </settings>
         </column>
-        <column name="cost" class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Columns\Price">
+        <column name="cost" class="RealThanks\GiftProvider\Ui\Component\Order\Listing\Columns\Price">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Cost</label>
@@ -154,7 +154,7 @@
             </settings>
         </column>
         <actionsColumn name="actions"
-                       class="WiserBrand\RealThanks\Ui\Component\Order\Listing\Action\ReSend">
+                       class="RealThanks\GiftProvider\Ui\Component\Order\Listing\Action\ReSend">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>

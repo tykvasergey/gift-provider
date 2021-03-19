@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Ui\Component;
+namespace RealThanks\GiftProvider\Ui\Component;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
-use WiserBrand\RealThanks\Helper\Config;
+use RealThanks\GiftProvider\Helper\Config;
 
 class SendGiftActionColumn extends \Magento\Ui\Component\Listing\Columns\Column
 {

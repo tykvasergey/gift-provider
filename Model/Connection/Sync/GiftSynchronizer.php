@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\RealThanks\Sync;
+namespace RealThanks\GiftProvider\Model\Connection\Sync;
 
-use WiserBrand\RealThanks\Model\RealThanks\Adapter;
-use WiserBrand\RealThanks\Model\RtGift;
-use WiserBrand\RealThanks\Model\RtGiftFactory;
-use WiserBrand\RealThanks\Model\RtGiftRepository;
-use WiserBrand\RealThanks\Model\SyncLogManagement;
+use RealThanks\GiftProvider\Model\Connection\Adapter;
+use RealThanks\GiftProvider\Model\RtGift;
+use RealThanks\GiftProvider\Model\RtGiftFactory;
+use RealThanks\GiftProvider\Model\RtGiftRepository;
+use RealThanks\GiftProvider\Model\SyncLogManagement;
 
 class GiftSynchronizer implements SynchronizerInterface
 {

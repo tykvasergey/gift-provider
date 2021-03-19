@@ -1,5 +1,5 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\Order\Listing\Action;
+namespace RealThanks\GiftProvider\Ui\Component\Order\Listing\Action;
 
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\UrlInterface;

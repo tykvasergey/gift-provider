@@ -1,6 +1,6 @@
 <?php
 
-namespace WiserBrand\RealThanks\Model\ResourceModel\RtOrder;
+namespace RealThanks\GiftProvider\Model\ResourceModel\RtOrder;
 
 use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
@@ -13,6 +13,6 @@ class Collection extends AbstractCollection
      */
     public function _construct()
     {
-        $this->_init('WiserBrand\RealThanks\Model\RtOrder', 'WiserBrand\RealThanks\Model\ResourceModel\RtOrder');
+        $this->_init('RealThanks\GiftProvider\Model\RtOrder', 'RealThanks\GiftProvider\Model\ResourceModel\RtOrder');
     }
 }

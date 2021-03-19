@@ -1,5 +1,5 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="wiser_brand_rt_after_gift_send">
-        <observer name="wb_rt_update_balance" instance="WiserBrand\RealThanks\Observer\AfterSendGiftObserver" />
+    <event name="realthanks_provider_after_gift_send">
+        <observer name="wb_rt_update_balance" instance="RealThanks\GiftProvider\Observer\AfterSendGiftObserver" />
     </event>
 </config>

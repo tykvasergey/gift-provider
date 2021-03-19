@@ -1,10 +1,10 @@
 <?php
 
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use \Magento\Framework\Model\AbstractModel;
-use WiserBrand\RealThanks\Api\Data\RtOrderInterface;
-use WiserBrand\RealThanks\Model\ResourceModel\RtOrder as ResourceModel;
+use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
+use RealThanks\GiftProvider\Model\ResourceModel\RtOrder as ResourceModel;
 
 class RtOrder extends AbstractModel implements RtOrderInterface
 {

@@ -9,7 +9,7 @@
     <update handle="styles"/>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="modal_gift_form" ifconfig="realthanks/api/enabled"/>
+            <uiComponent name="modal_gift_form" ifconfig="rt_gift_provider/api/enabled"/>
         </referenceContainer>
     </body>
 </page>

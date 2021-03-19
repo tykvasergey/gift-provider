@@ -6,7 +6,7 @@
 var config = {
     map: {
         '*': {
-            triggerSendGiftModal: 'WiserBrand_RealThanks/js/form/components/trigger'
+            triggerSendGiftModal: 'RealThanks_GiftProvider/js/form/components/trigger'
         }
     }
 };

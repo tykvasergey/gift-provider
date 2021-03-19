@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Controller\Adminhtml\RtOrder;
+namespace RealThanks\GiftProvider\Controller\Adminhtml\RtOrder;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -10,16 +10,16 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Forward;
 use Magento\Framework\Controller\Result\ForwardFactory;
 use Psr\Log\LoggerInterface;
-use WiserBrand\RealThanks\Model\RtOrderFactory;
-use WiserBrand\RealThanks\Model\RtOrderRepository;
-use WiserBrand\RealThanks\Model\Validation\GiftSendFormValidatorFactory;
+use RealThanks\GiftProvider\Model\RtOrderFactory;
+use RealThanks\GiftProvider\Model\RtOrderRepository;
+use RealThanks\GiftProvider\Model\Validation\GiftSendFormValidatorFactory;
 
 class Create extends Action implements HttpPostActionInterface
 {
     /**
      * @inheritdoc
      */
-    const ADMIN_RESOURCE = 'WiserBrand_RealThanks::rt_admin';
+    const ADMIN_RESOURCE = 'RealThanks_GiftProvider::rt_admin';
 
     /**
      * @var GiftSendFormValidatorFactory

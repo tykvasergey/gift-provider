@@ -93,7 +93,7 @@
             </settings>
         </column>
         <column name="image_url"
-                class="WiserBrand\RealThanks\Ui\Component\Gift\Listing\Column\Thumbnail"
+                class="RealThanks\GiftProvider\Ui\Component\Gift\Listing\Column\Thumbnail"
                 component="Magento_Ui/js/grid/columns/thumbnail"
                 sortOrder="10">
             <settings>
@@ -152,7 +152,7 @@
             </settings>
         </column>
         <actionsColumn name="actions"
-                       class="WiserBrand\RealThanks\Ui\Component\Gift\Listing\Action\SendGift"
+                       class="RealThanks\GiftProvider\Ui\Component\Gift\Listing\Action\SendGift"
                        sortOrder="80">
                 <settings>
                     <label translate="true">RealThanks</label>

@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Controller\Adminhtml\Config;
+namespace RealThanks\GiftProvider\Controller\Adminhtml\Config;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Response\Http;
 use Psr\Log\LoggerInterface;
-use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerInterface;
-use WiserBrand\RealThanks\Model\RealThanks\Sync\SynchronizerListInterface;
+use RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerInterface;
+use RealThanks\GiftProvider\Model\Connection\Sync\SynchronizerListInterface;
 
 class Update extends Action implements HttpGetActionInterface
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Block\Adminhtml\SalesOrder;
+namespace RealThanks\GiftProvider\Block\Adminhtml\SalesOrder;
 
 use Magento\Sales\Block\Adminhtml\Order\View as OrderView;
 

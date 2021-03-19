@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Exception;
+namespace RealThanks\GiftProvider\Exception;
 
 use Magento\Framework\Exception\LocalizedException;
 

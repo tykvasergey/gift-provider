@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Block\Adminhtml\Customer\Edit;
+namespace RealThanks\GiftProvider\Block\Adminhtml\Customer\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Block\Adminhtml\Edit\GenericButton;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use WiserBrand\RealThanks\Block\Adminhtml\SendGiftButtonTrait;
-use WiserBrand\RealThanks\Helper\Config;
+use RealThanks\GiftProvider\Block\Adminhtml\SendGiftButtonTrait;
+use RealThanks\GiftProvider\Helper\Config;
 
 class SendGiftButton extends GenericButton implements ButtonProviderInterface
 {

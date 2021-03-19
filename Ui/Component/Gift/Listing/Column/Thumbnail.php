@@ -1,5 +1,5 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\Gift\Listing\Column;
+namespace RealThanks\GiftProvider\Ui\Component\Gift\Listing\Column;
 
 class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
 {

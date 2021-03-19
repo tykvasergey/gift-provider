@@ -9,7 +9,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="WiserBrand_RealThanks::rt_admin" title="Real Thanks Integration administration"/>
+                <resource id="RealThanks_GiftProvider::rt_admin" title="Real Thanks Integration administration"/>
             </resource>
         </resources>
     </acl>

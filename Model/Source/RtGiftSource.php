@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\Source;
+namespace RealThanks\GiftProvider\Model\Source;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Data\OptionSourceInterface;
-use WiserBrand\RealThanks\Model\RtGift;
-use WiserBrand\RealThanks\Model\RtGiftRepository;
+use RealThanks\GiftProvider\Model\RtGift;
+use RealThanks\GiftProvider\Model\RtGiftRepository;
 
 class RtGiftSource implements OptionSourceInterface
 {

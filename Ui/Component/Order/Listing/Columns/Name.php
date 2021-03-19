@@ -1,9 +1,9 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\Order\Listing\Columns;
+namespace RealThanks\GiftProvider\Ui\Component\Order\Listing\Columns;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
-use WiserBrand\RealThanks\Model\RtOrderRepository;
+use RealThanks\GiftProvider\Model\RtOrderRepository;
 
 class Name extends \Magento\Ui\Component\Listing\Columns\Column
 {

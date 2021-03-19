@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Observer;
+namespace RealThanks\GiftProvider\Observer;
 
 use Magento\Framework\Event\Observer;
-use WiserBrand\RealThanks\Model\RealThanks\Sync\BalanceSynchronizer;
-use WiserBrand\RealThanks\Helper\Config;
+use Magento\Framework\Event\ObserverInterface;
+use RealThanks\GiftProvider\Model\Connection\Sync\BalanceSynchronizer;
+use RealThanks\GiftProvider\Helper\Config;
 
-class AfterSendGiftObserver implements \Magento\Framework\Event\ObserverInterface
+class AfterSendGiftObserver implements ObserverInterface
 {
     /**
      * @var BalanceSynchronizer

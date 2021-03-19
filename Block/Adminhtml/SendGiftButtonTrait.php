@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Block\Adminhtml;
+namespace RealThanks\GiftProvider\Block\Adminhtml;
 
 trait SendGiftButtonTrait
 {

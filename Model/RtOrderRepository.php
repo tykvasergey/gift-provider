@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchResultFactory;
@@ -13,14 +13,14 @@ use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\Data\SearchResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use WiserBrand\RealThanks\Api\Data\RtOrderInterface;
-use WiserBrand\RealThanks\Model\ResourceModel\RtOrder as GiftOrderResource;
-use WiserBrand\RealThanks\Model\ResourceModel\RtOrder\Collection;
-use WiserBrand\RealThanks\Model\ResourceModel\RtOrder\CollectionFactory;
+use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
+use RealThanks\GiftProvider\Model\ResourceModel\RtOrder as GiftOrderResource;
+use RealThanks\GiftProvider\Model\ResourceModel\RtOrder\Collection;
+use RealThanks\GiftProvider\Model\ResourceModel\RtOrder\CollectionFactory;
 
-class RtOrderRepository implements \WiserBrand\RealThanks\Api\RtOrderRepositoryInterface
+class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositoryInterface
 {
-    const RT_GIFT_TABLE_NAME = 'wiser_brand_rt_gift';
+    const RT_GIFT_TABLE_NAME = 'realthanks_provider_gift';
     /**
      * @var GiftOrderResource
      */

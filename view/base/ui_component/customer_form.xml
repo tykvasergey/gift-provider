@@ -5,11 +5,11 @@
     <settings>
     <buttons>
         <button name="rt_send_gift"
-                class="WiserBrand\RealThanks\Block\Adminhtml\Customer\Edit\SendGiftButton"/>
+                class="RealThanks\GiftProvider\Block\Adminhtml\Customer\Edit\SendGiftButton"/>
     </buttons>
     </settings>
 
-    <fieldset name="realthanks" class="WiserBrand\RealThanks\Ui\Component\Customer\Form\Tab\AssociatedRtGifts">
+    <fieldset name="realthanks" class="RealThanks\GiftProvider\Ui\Component\Customer\Form\Tab\AssociatedRtGifts">
         <settings>
             <collapsible>false</collapsible>
             <label translate="true">Associated RealThanks gifts</label>

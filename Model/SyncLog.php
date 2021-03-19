@@ -1,6 +1,6 @@
 <?php
 
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use \Magento\Framework\Model\AbstractModel;
 
@@ -16,7 +16,7 @@ class SyncLog extends AbstractModel
      */
     public function _construct()
     {
-        $this->_init(\WiserBrand\RealThanks\Model\ResourceModel\SyncLog::class);
+        $this->_init(\RealThanks\GiftProvider\Model\ResourceModel\SyncLog::class);
     }
 
     /**

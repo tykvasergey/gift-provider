@@ -1,11 +1,11 @@
 <?php
 
-namespace WiserBrand\RealThanks\Api;
+namespace RealThanks\GiftProvider\Api;
 
 use Magento\Framework\Api\Search\SearchResult;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Data\SearchResultInterface;
-use WiserBrand\RealThanks\Api\Data\RtOrderInterface;
+use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
 
 /**
  * @api
@@ -25,7 +25,7 @@ interface RtOrderRepositoryInterface
      * Retrieve RT Order.
      *
      * @param int $giftOrderId
-     * @return \WiserBrand\RealThanks\Api\Data\RtOrderInterface
+     * @return \RealThanks\RealThanks\Api\Data\RtOrderInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getById(int $giftOrderId): RtOrderInterface;

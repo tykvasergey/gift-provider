@@ -23,7 +23,7 @@
             </item>
         </argument>
 
-        <dataProvider class="WiserBrand\RealThanks\Ui\DataProvider\ModalForm\DataProvider" name="modal_gift_form_data_source">
+        <dataProvider class="RealThanks\GiftProvider\Ui\DataProvider\ModalForm\DataProvider" name="modal_gift_form_data_source">
             <settings>
                 <requestFieldName>form_id</requestFieldName>
                 <primaryFieldName>form_id</primaryFieldName>
@@ -38,7 +38,7 @@
                 <option name="title" xsi:type="string" translate="true">Send gift</option>
             </options>
         </settings>
-        <insertForm name="send_gift_form_loader" sortOrder="2010" component="WiserBrand_RealThanks/js/form/components/insert-send-gift-form">
+        <insertForm name="send_gift_form_loader" sortOrder="2010" component="RealThanks_GiftProvider/js/form/components/insert-send-gift-form">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="giftModalProvider" xsi:type="string">${ $.parentName }</item>

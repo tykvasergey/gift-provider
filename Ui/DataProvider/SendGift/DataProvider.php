@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Ui\DataProvider\SendGift;
+namespace RealThanks\GiftProvider\Ui\DataProvider\SendGift;
 
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as ElementDataProvider;
 

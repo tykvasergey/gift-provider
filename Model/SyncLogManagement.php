@@ -1,10 +1,10 @@
 <?php
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\DataObject;
-use WiserBrand\RealThanks\Model\ResourceModel\SyncLog as SyncLogResourceModel;
-use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\Collection;
-use WiserBrand\RealThanks\Model\ResourceModel\SyncLog\CollectionFactory;
+use RealThanks\GiftProvider\Model\ResourceModel\SyncLog as SyncLogResourceModel;
+use RealThanks\GiftProvider\Model\ResourceModel\SyncLog\Collection;
+use RealThanks\GiftProvider\Model\ResourceModel\SyncLog\CollectionFactory;
 
 class SyncLogManagement
 {
@@ -29,7 +29,7 @@ class SyncLogManagement
      * @param SyncLogFactory $syncLogFactory
      * @param SyncLogResourceModel $syncLogResource
      */
-    public function __construct(CollectionFactory $collectionFactory, \WiserBrand\RealThanks\Model\SyncLogFactory $syncLogFactory, SyncLogResourceModel $syncLogResource)
+    public function __construct(CollectionFactory $collectionFactory, \RealThanks\GiftProvider\Model\SyncLogFactory $syncLogFactory, SyncLogResourceModel $syncLogResource)
     {
         $this->collectionFactory = $collectionFactory;
         $this->syncLogFactory = $syncLogFactory;

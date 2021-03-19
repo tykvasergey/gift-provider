@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Controller\Adminhtml\RtOrder;
+namespace RealThanks\GiftProvider\Controller\Adminhtml\RtOrder;
 
 use Magento\Framework\App\ResponseInterface;
 
@@ -12,7 +12,7 @@ class Index extends \Magento\Backend\App\Action implements \Magento\Framework\Ap
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'WiserBrand_RealThanks::rt_admin';
+    const ADMIN_RESOURCE = 'RealThanks_GiftProvider::rt_admin';
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory

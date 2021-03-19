@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchResult;
@@ -15,14 +15,14 @@ use Magento\Framework\Data\SearchResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift\Collection;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift as GiftResource;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift\CollectionFactory;
-use WiserBrand\RealThanks\Api\Data\RtGiftInterface;
-use WiserBrand\RealThanks\Model\RtGiftFactory;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift\Collection;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift as GiftResource;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift\CollectionFactory;
+use RealThanks\GiftProvider\Api\Data\RtGiftInterface;
+use RealThanks\GiftProvider\Model\RtGiftFactory;
 
 
-class RtGiftRepository implements \WiserBrand\RealThanks\Api\RtGiftRepositoryInterface
+class RtGiftRepository implements \RealThanks\GiftProvider\Api\RtGiftRepositoryInterface
 {
     /**
      * @var GiftResource
@@ -81,7 +81,7 @@ class RtGiftRepository implements \WiserBrand\RealThanks\Api\RtGiftRepositoryInt
      * @param SortOrderBuilder $sortOrderBuilder
      * @param SearchResultFactory $searchResultsFactory
      */
-    public function __construct(GiftResource $resource, \WiserBrand\RealThanks\Model\RtGiftFactory $giftFactory, CollectionFactory $resultCollectionFactory, SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory, CollectionProcessorInterface $collectionProcessor, SearchCriteriaBuilder $searchCriteriaBuilder, FilterBuilder $filterBuilder, SortOrderBuilder $sortOrderBuilder, SearchResultFactory $searchResultsFactory)
+    public function __construct(GiftResource $resource, \RealThanks\GiftProvider\Model\RtGiftFactory $giftFactory, CollectionFactory $resultCollectionFactory, SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory, CollectionProcessorInterface $collectionProcessor, SearchCriteriaBuilder $searchCriteriaBuilder, FilterBuilder $filterBuilder, SortOrderBuilder $sortOrderBuilder, SearchResultFactory $searchResultsFactory)
     {
         $this->resource = $resource;
         $this->giftFactory = $giftFactory;

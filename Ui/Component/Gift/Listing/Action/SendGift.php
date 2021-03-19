@@ -1,5 +1,5 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\Gift\Listing\Action;
+namespace RealThanks\GiftProvider\Ui\Component\Gift\Listing\Action;
 
 use Magento\Ui\Component\Listing\Columns\Column;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace WiserBrand\RealThanks\Block\Adminhtml\System\Config;
+namespace RealThanks\GiftProvider\Block\Adminhtml\System\Config;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use WiserBrand\RealThanks\Model\SyncLogManagement;
+use RealThanks\GiftProvider\Model\SyncLogManagement;
 
 class Updater extends Field
 {
@@ -54,7 +54,7 @@ class Updater extends Field
     {
         parent::_prepareLayout();
         if (!$this->getTemplate()) {
-            $this->setTemplate('WiserBrand_RealThanks::system/config/sync_log_update.phtml');
+            $this->setTemplate('RealThanks_GiftProvider::system/config/sync_log_update.phtml');
         }
         return $this;
     }

@@ -3,11 +3,11 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="WiserBrand\RealThanks\Block\Adminhtml\SalesOrder\View"
+            <block class="RealThanks\GiftProvider\Block\Adminhtml\SalesOrder\View"
                    name="realthanks_order_view"
-                   ifconfig="realthanks/api/enabled"/>
+                   ifconfig="rt_gift_provider/api/enabled"/>
             <referenceBlock name="sales_order_invoice.grid.container">
-                <uiComponent name="modal_gift_form" ifconfig="realthanks/api/enabled"/>
+                <uiComponent name="modal_gift_form" ifconfig="rt_gift_provider/api/enabled"/>
             </referenceBlock>
         </referenceContainer>
 

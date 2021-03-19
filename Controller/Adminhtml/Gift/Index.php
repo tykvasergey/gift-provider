@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Controller\Adminhtml\Gift;
+namespace RealThanks\GiftProvider\Controller\Adminhtml\Gift;
 
 class Index extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpGetActionInterface
 {
     /**
      * @inheritdoc
      */
-    const ADMIN_RESOURCE = 'WiserBrand_RealThanks::rt_admin';
+    const ADMIN_RESOURCE = 'RealThanks_GiftProvider::rt_admin';
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory

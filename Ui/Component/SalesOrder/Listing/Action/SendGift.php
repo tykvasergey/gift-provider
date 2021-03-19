@@ -1,7 +1,7 @@
 <?php
-namespace WiserBrand\RealThanks\Ui\Component\SalesOrder\Listing\Action;
+namespace RealThanks\GiftProvider\Ui\Component\SalesOrder\Listing\Action;
 
-use WiserBrand\RealThanks\Ui\Component\SendGiftActionColumn;
+use RealThanks\GiftProvider\Ui\Component\SendGiftActionColumn;
 
 class SendGift extends SendGiftActionColumn
 {

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\ResourceModel\RtGift;
+namespace RealThanks\GiftProvider\Model\ResourceModel\RtGift;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift as ResourceModel;
-use WiserBrand\RealThanks\Model\RtGift as Model;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift as ResourceModel;
+use RealThanks\GiftProvider\Model\RtGift as Model;
 
 class Collection extends AbstractCollection
 {

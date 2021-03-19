@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Ui\DataProvider\ModalForm;
+namespace RealThanks\GiftProvider\Ui\DataProvider\ModalForm;
 
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider as ElementDataProvider;
 

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\RealThanks\Sync;
+namespace RealThanks\GiftProvider\Model\Connection\Sync;
 
-use WiserBrand\RealThanks\Model\RealThanks\Adapter;
-use WiserBrand\RealThanks\Model\RtOrder;
-use WiserBrand\RealThanks\Model\RtOrderRepository;
-use WiserBrand\RealThanks\Model\SyncLog;
-use WiserBrand\RealThanks\Model\SyncLogManagement;
+use RealThanks\GiftProvider\Model\Connection\Adapter;
+use RealThanks\GiftProvider\Model\RtOrder;
+use RealThanks\GiftProvider\Model\RtOrderRepository;
+use RealThanks\GiftProvider\Model\SyncLog;
+use RealThanks\GiftProvider\Model\SyncLogManagement;
 
 class OrderSynchronizer implements SynchronizerInterface
 {

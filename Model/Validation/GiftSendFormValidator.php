@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\Validation;
+namespace RealThanks\GiftProvider\Model\Validation;
 
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validator\EmailAddress;
-use WiserBrand\RealThanks\Model\RtGiftRepository;
+use RealThanks\GiftProvider\Model\RtGiftRepository;
 
 class GiftSendFormValidator extends DataObject
 {

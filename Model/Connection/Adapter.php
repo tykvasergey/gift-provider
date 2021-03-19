@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model\RealThanks;
+namespace RealThanks\GiftProvider\Model\Connection;
 
 use Magento\Framework\HTTP\Client\Curl;
 use Psr\Log\LoggerInterface;
-use WiserBrand\RealThanks\Exception\RtApiException;
-use WiserBrand\RealThanks\Helper\Config;
-use WiserBrand\RealThanks\Model\RtGiftRepository;
-use WiserBrand\RealThanks\Model\RtOrderRepository;
+use RealThanks\GiftProvider\Exception\RtApiException;
+use RealThanks\GiftProvider\Helper\Config;
+use RealThanks\GiftProvider\Model\RtGiftRepository;
+use RealThanks\GiftProvider\Model\RtOrderRepository;
 
 class Adapter
 {
@@ -70,7 +70,7 @@ class Adapter
     private function init()
     {
         if (!$this->configHelper->isApiEnabled()) {
-            throw new RtApiException(__('RealThanks module API disabled in configuration. Please check the config node - "realthanks/api/enabled"'));
+            throw new RtApiException(__('RealThanks module API disabled in configuration. Please check the config node - "rt_gift_provider/api/enabled"'));
         }
         $this->curl->addHeader("Content-Type", "application/json");
         $this->curl->addHeader("Authorization", "Bearer {$this->configHelper->getApiKey()}");

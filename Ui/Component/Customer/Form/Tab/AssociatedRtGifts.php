@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Ui\Component\Customer\Form\Tab;
+namespace RealThanks\GiftProvider\Ui\Component\Customer\Form\Tab;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\Component\Form\Fieldset;
-use WiserBrand\RealThanks\Helper\Config;
+use RealThanks\GiftProvider\Helper\Config;
 
 class AssociatedRtGifts extends Fieldset
 {

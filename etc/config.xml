@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <realthanks>
+        <rt_gift_provider>
             <api>
                 <enabled>0</enabled>
                 <key backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
@@ -9,6 +9,6 @@
             <cron_settings>
                 <schedule>0 0 * * *</schedule>
             </cron_settings>
-        </realthanks>
+        </rt_gift_provider>
     </default>
 </config>

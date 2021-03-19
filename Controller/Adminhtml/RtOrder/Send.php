@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Controller\Adminhtml\RtOrder;
+namespace RealThanks\GiftProvider\Controller\Adminhtml\RtOrder;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -10,17 +10,17 @@ use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Psr\Log\LoggerInterface;
-use WiserBrand\RealThanks\Exception\RtApiException;
-use WiserBrand\RealThanks\Model\RealThanks\Adapter;
-use WiserBrand\RealThanks\Model\RtOrder;
-use WiserBrand\RealThanks\Model\RtOrderRepository;
+use RealThanks\GiftProvider\Exception\RtApiException;
+use RealThanks\GiftProvider\Model\Connection\Adapter;
+use RealThanks\GiftProvider\Model\RtOrder;
+use RealThanks\GiftProvider\Model\RtOrderRepository;
 
 class Send extends Action implements HttpGetActionInterface
 {
     /**
      * @inheritdoc
      */
-    const ADMIN_RESOURCE = 'WiserBrand_RealThanks::rt_admin';
+    const ADMIN_RESOURCE = 'RealThanks_GiftProvider::rt_admin';
 
     const RT_ORDER_GRID_URL = 'realthanks/rtorder/index';
 
@@ -74,7 +74,7 @@ class Send extends Action implements HttpGetActionInterface
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             $this->messageManager->addSuccessMessage(__("Your gift was successfully sent. Your order id is - %1", $orderId));
             $this->_eventManager->dispatch(
-                'wiser_brand_rt_after_gift_send',
+                'realthanks_provider_after_gift_send',
                 ['order_model' => $orderModel]
             );
         } catch (RtApiException $e) {

@@ -2,9 +2,9 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="WiserBrand_RealThanks::main" title="Real Thanks" module="WiserBrand_RealThanks" sortOrder="30" parent="Magento_Backend::marketing" resource="WiserBrand_RealThanks::rt_admin" dependsOnConfig="realthanks/api/enabled"/>
-        <add id="WiserBrand_RealThanks::gift" title="Gifts" module="WiserBrand_RealThanks" sortOrder="10" parent="WiserBrand_RealThanks::main" action="realthanks/gift" resource="WiserBrand_RealThanks::rt_admin"/>
-        <add id="WiserBrand_RealThanks::order" title="Order" module="WiserBrand_RealThanks" sortOrder="20" parent="WiserBrand_RealThanks::main" action="realthanks/rtorder" resource="WiserBrand_RealThanks::rt_admin"/>
-        <add id="WiserBrand_RealThanks::settings" title="Settings" module="WiserBrand_RealThanks" sortOrder="30" parent="WiserBrand_RealThanks::main" action="adminhtml/system_config/edit/section/realthanks" resource="WiserBrand_RealThanks::rt_admin"/>
+        <add id="RealThanks_GiftProvider::main" title="Real Thanks" module="RealThanks_GiftProvider" sortOrder="30" parent="Magento_Backend::marketing" resource="RealThanks_GiftProvider::rt_admin" dependsOnConfig="rt_gift_provider/api/enabled"/>
+        <add id="RealThanks_GiftProvider::gift" title="Gifts" module="RealThanks_GiftProvider" sortOrder="10" parent="RealThanks_GiftProvider::main" action="realthanks/gift" resource="RealThanks_GiftProvider::rt_admin"/>
+        <add id="RealThanks_GiftProvider::order" title="Order" module="RealThanks_GiftProvider" sortOrder="20" parent="RealThanks_GiftProvider::main" action="realthanks/rtorder" resource="RealThanks_GiftProvider::rt_admin"/>
+        <add id="RealThanks_GiftProvider::settings" title="Settings" module="RealThanks_GiftProvider" sortOrder="30" parent="RealThanks_GiftProvider::main" action="adminhtml/system_config/edit/section/realthanks" resource="RealThanks_GiftProvider::rt_admin"/>
     </menu>
 </config>

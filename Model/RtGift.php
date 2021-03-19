@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WiserBrand\RealThanks\Model;
+namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\Model\AbstractModel;
-use WiserBrand\RealThanks\Api\Data\RtGiftInterface;
-use WiserBrand\RealThanks\Model\ResourceModel\RtGift as ResourceModel;
+use RealThanks\GiftProvider\Api\Data\RtGiftInterface;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift as ResourceModel;
 
 class RtGift extends AbstractModel implements RtGiftInterface
 {
