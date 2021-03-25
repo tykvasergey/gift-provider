@@ -65,7 +65,6 @@ define([
         onResponse: function (responseData) {
             if (responseData.status !== 'Error') {
                 this.giftModalProvider().closeModal();
-                //this.ownerComponent().reset();
                 this.resetForm();
             } else {
 

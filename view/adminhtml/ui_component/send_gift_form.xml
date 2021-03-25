@@ -32,7 +32,7 @@
         <settings>
             <submitUrl path="realthanks/rtorder/create"/>
         </settings>
-<!--        <aclResource>Magento_Customer::manage</aclResource>-->
+        <aclResource>RealThanks_GiftProvider::rt_admin</aclResource>
         <dataProvider class="RealThanks\GiftProvider\Ui\DataProvider\SendGift\DataProvider" name="send_gift_form_data_source">
             <settings>
                 <requestFieldName>form_id</requestFieldName>
@@ -60,16 +60,11 @@
                 <select>
                     <settings>
                         <options class="RealThanks\GiftProvider\Model\Source\RtGiftSource"/>
-                        <!--                        <filterBy>-->
-                        <!--                            <field>country_id</field>-->
-                        <!--                            <target>${ $.provider }:${ $.parentScope }.country_id</target>-->
-                        <!--                        </filterBy>-->
-                        <!--                        <customEntry>region</customEntry>-->
-
                     </settings>
                 </select>
             </formElements>
         </field>
+
 
         <field name="email" sortOrder="10" formElement="email">
             <settings>

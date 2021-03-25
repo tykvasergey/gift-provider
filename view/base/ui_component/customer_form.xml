@@ -15,14 +15,13 @@
             <label translate="true">Associated RealThanks gifts</label>
             <componentType>fieldset</componentType>
         </settings>
-
         <insertListing name="rt_order_grid_insert">
             <settings>
                 <dataLinks>
                     <exports>true</exports>
                     <imports>true</imports>
                 </dataLinks>
-                <externalProvider>rt_gift_grid_list.grid_order_list_data_source</externalProvider>
+                <externalProvider>rt_order_grid_list.grid_order_list_data_source</externalProvider>
                 <selectionsProvider>rt_order_grid_list.rt_order_grid_list.order_columns.ids</selectionsProvider>
                 <autoRender>true</autoRender>
                 <dataScope>rt_order_grid_list</dataScope>
@@ -36,5 +35,4 @@
             </settings>
         </insertListing>
     </fieldset>
-
 </form>
