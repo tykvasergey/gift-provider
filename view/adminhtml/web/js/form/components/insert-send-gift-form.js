@@ -17,17 +17,14 @@ define([
     return Insert.extend({
         defaults: {
             listens: {
-                responseData: 'onResponse',
-                '${ $.giftModalProvider }:openModal' : 'onOpenModal'
+                responseData: 'onResponse'
             },
             modules: {
-                giftModalProvider: '${ $.giftModalProvider }',
-                ownerComponent: '${ $.ownerComponent }'
+                giftModalProvider: '${ $.giftModalProvider }'
             }
         },
 
         requestData: function (params, ajaxSettings) {
-            // === @todo refactor these statements:
             if (this.customer_email) {
                 params.email = this.customer_email;
             } else if (this.previousParams.email) {
@@ -35,10 +32,10 @@ define([
             }
             if (this.gift_id) {
                 params.gift_id = this.gift_id;
-            } else  if (this.gift_id) {
+            } else if (this.previousParams.gift_id) {
                 params.gift_id = this.previousParams.gift_id;
             }
-            // ===
+
             let query = utils.copy(params);
             ajaxSettings = _.extend({
                 url: this['update_url'],
@@ -50,13 +47,6 @@ define([
             this.loading(true);
 
             return $.ajax(ajaxSettings);
-        },
-
-        onOpenModal: function () {
-            // clear previous messages
-            //@todo moves to the modal component, here it dosen`t invoke
-            $('#rt_message_wrap').remove();
-            // ===
         },
 
         /**

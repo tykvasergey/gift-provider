@@ -10,7 +10,8 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchCriteriaInterfaceFactory;
 use Magento\Framework\Api\SortOrderBuilder;
-use Magento\Framework\Data\SearchResultInterface;
+use Magento\Framework\Api\Search\SearchResultInterface;
+use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
@@ -122,6 +123,11 @@ class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositor
         return $giftOrder;
     }
 
+    /**
+     * @param RtOrderInterface $giftOrder
+     * @return RtOrderInterface
+     * @throws CouldNotSaveException
+     */
     public function save(RtOrderInterface $giftOrder)
     {
         try {
@@ -136,10 +142,20 @@ class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositor
         return $giftOrder;
     }
 
-    public function delete(RtOrderInterface $giftOrder)
+    /**
+     * @param RtOrder $giftOrder
+     * @return bool
+     * @throws CouldNotDeleteException
+     */
+    public function delete(RtOrder $giftOrder): bool
     {
-        //@todo
-        return;
+        try {
+            $this->resource->delete($giftOrder);
+        } catch (\Exception $exception) {
+            throw new CouldNotDeleteException(__($exception->getMessage()));
+        }
+
+        return true;
     }
 
     /**
@@ -156,6 +172,12 @@ class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositor
         return $collection->getItems();
     }
 
+    /**
+     * @param string $attribute
+     * @param $orderId
+     * @return mixed
+     * @throws NoSuchEntityException
+     */
     public function getGiftAttributeById(string $attribute, $orderId)
     {
         /** @var Collection $collection */

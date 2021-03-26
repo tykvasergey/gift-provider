@@ -19,13 +19,13 @@ interface RtOrderRepositoryInterface
      * @return \Magento\Framework\Api\Search\SearchResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): \Magento\Framework\Api\Search\SearchResultInterface;
 
     /**
      * Retrieve RT Order.
      *
      * @param int $giftOrderId
-     * @return \RealThanks\RealThanks\Api\Data\RtOrderInterface
+     * @return \RealThanks\GiftProvider\Api\Data\RtOrderInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getById(int $giftOrderId): RtOrderInterface;

@@ -9,7 +9,7 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\Forward;
 use Magento\Framework\Controller\Result\ForwardFactory;
-use Psr\Log\LoggerInterface;
+use RealThanks\GiftProvider\Logger\Logger;
 use RealThanks\GiftProvider\Model\RtOrderFactory;
 use RealThanks\GiftProvider\Model\RtOrderRepository;
 use RealThanks\GiftProvider\Model\Validation\GiftSendFormValidatorFactory;
@@ -27,7 +27,7 @@ class Create extends Action implements HttpPostActionInterface
     private $giftSendFormValidatorFactory;
 
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 
@@ -53,7 +53,7 @@ class Create extends Action implements HttpPostActionInterface
 
     public function __construct(
         GiftSendFormValidatorFactory $giftSendFormValidatorFactory,
-        LoggerInterface $logger,
+        Logger $logger,
         RtOrderFactory $rtOrderFactory,
         RtOrderRepository $rtOrderRepo,
         ForwardFactory $forwardFactory,
@@ -74,10 +74,6 @@ class Create extends Action implements HttpPostActionInterface
      */
     public function execute()
     {
-        // 1. Get form data from request
-        // 2. Validate data
-        // 3. Create order
-        // 4. Forward to send controller with order id param
         $orderModel = null;
         try {
             $data = $this->getRequest()->getPostValue();

@@ -50,7 +50,6 @@ class GiftSendFormValidator extends DataObject
 
     private function validateRequiredFields() : bool
     {
-        //@todo check on injections?
         $valid = true;
         foreach (self::REQUIRED_FIELDS as $fieldName) {
             if (!$this->getData($fieldName)) {

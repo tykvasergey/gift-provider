@@ -24,13 +24,15 @@ class SyncLogManagement
     private $syncLogResource;
 
     /**
-     * SyncLogManagement constructor.
      * @param CollectionFactory $collectionFactory
      * @param SyncLogFactory $syncLogFactory
      * @param SyncLogResourceModel $syncLogResource
      */
-    public function __construct(CollectionFactory $collectionFactory, \RealThanks\GiftProvider\Model\SyncLogFactory $syncLogFactory, SyncLogResourceModel $syncLogResource)
-    {
+    public function __construct(
+        CollectionFactory $collectionFactory,
+        SyncLogFactory $syncLogFactory,
+        SyncLogResourceModel $syncLogResource
+    ) {
         $this->collectionFactory = $collectionFactory;
         $this->syncLogFactory = $syncLogFactory;
         $this->syncLogResource = $syncLogResource;
@@ -90,22 +92,20 @@ class SyncLogManagement
     {
         /** @var SyncLog $syncLogModel */
         $syncLogModel = $this->syncLogFactory->create(['data' => $data]);
-        // @todo add try
         $syncLogModel->setDataChanges(true);
         $this->syncLogResource->save($syncLogModel);
     }
 
     /**
-     * Clean old syncLog records
-     * @todo  add this function to full updater
-     * @param int|null $numberOfRecords
+     * Clean old records
+     * @param int|null $number
      */
-    public function clean(int $numberOfRecords = null)
+    public function cleanSyncLogs(int $number = null)
     {
         /** @var ResourceModel\SyncLog\Collection $collection */
         $collection = $this->collectionFactory->create();
         $collection->addOrder('creation_time', Collection::SORT_ORDER_ASC);
-        $collection->setPageSize($numberOfRecords ? $numberOfRecords : 10);
+        $collection->setPageSize($number ? $number : 100);
         $itemsToRemove = $collection->getItems();
 
         foreach ($itemsToRemove as $item) {

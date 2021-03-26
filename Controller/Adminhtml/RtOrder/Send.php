@@ -11,8 +11,8 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
-use Psr\Log\LoggerInterface;
 use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
+use RealThanks\GiftProvider\Logger\Logger;
 use RealThanks\GiftProvider\Model\Connection\Adapter;
 use RealThanks\GiftProvider\Model\RtOrderRepository;
 
@@ -36,20 +36,20 @@ class Send extends Action implements HttpGetActionInterface
     private $giftOrderRepo;
 
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 
     /**
      * @param Adapter $adapter
      * @param RtOrderRepository $giftOrderRepo
-     * @param LoggerInterface $logger
+     * @param Logger $logger
      * @param Context $context
      */
     public function __construct(
         Adapter $adapter,
         RtOrderRepository $giftOrderRepo,
-        LoggerInterface $logger,
+        Logger $logger,
         Context $context
     ) {
         $this->adapter = $adapter;
@@ -63,7 +63,6 @@ class Send extends Action implements HttpGetActionInterface
      */
     public function execute()
     {
-        //@todo add own log
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $orderId = (int) $this->getRequest()->getParam('order_id');
         try {
@@ -116,11 +115,18 @@ class Send extends Action implements HttpGetActionInterface
      */
     private function getAjaxResponse(RtOrderInterface $orderModel): Json
     {
-        $this->messageManager->getMessages(true);
-
+        $type = 'success';
+        if ($orderModel->getStatus() === 'Error') {
+            $type = 'error';
+        }
+        $messages = $this->messageManager->getMessages(true)->getItemsByType($type);
+        $resultMsg = '';
+        foreach ($messages as $message) {
+            $resultMsg .= $message->getText();
+        }
         /** @var Json $resultJson */
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-        $resultJson->setData(['status' => $orderModel->getStatus()]);
+        $resultJson->setData(['status' => $orderModel->getStatus(), 'message' => $resultMsg]);
 
         return $resultJson;
     }
