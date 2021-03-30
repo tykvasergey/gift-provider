@@ -188,7 +188,7 @@ class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositor
         $collection->join(
             $giftTable,
             "main_table.gift_id={$giftTable}.entity_id",
-            $attribute,
+            $attribute
         );
         $data = $collection->getData();
 

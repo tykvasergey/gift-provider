@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
         <job name="realthanks_provider_data_sync" instance="RealThanks\GiftProvider\Cron\DataSynchronization" method="execute">
-            <config_path>realthanks/cron_settings/schedule</config_path>
+            <config_path>rt_gift_provider/cron_settings/schedule</config_path>
         </job>
     </group>
 </config>
