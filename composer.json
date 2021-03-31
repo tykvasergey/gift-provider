@@ -1,7 +1,7 @@
 {
     "name": "realthanks/gift-provider",
     "version": "1.0.0",
-    "description": "Integration module with the Realthanks application",
+    "description": "Magento2 integration module for Realthanks application",
     "type": "magento2-module",
     "require": {
         "magento/framework": "^102|^103",
