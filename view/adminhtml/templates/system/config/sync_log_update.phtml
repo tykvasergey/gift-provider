@@ -2,7 +2,6 @@
 /** @var \RealThanks\GiftProvider\Block\Adminhtml\System\Config\Updater $block */
 ?>
 <script type="text/javascript">
-    //just to load jQuery on this page
     require(["jquery"], function () {
     });
 
@@ -28,20 +27,22 @@
     }
 
 </script>
-<button name="load_data" onclick="return updateData();"><?= /* @noEscape */ __('Update RealThanks data') ?></button>
+
 <?php
-$balance = __('Current account balance - %1', $block->getCurrentBalance());
+$balanceTxt = __('Current account balance: ');
 if ($block->getLatestSyncLogDate() === null) {
-    $class = 'message-notice';
+    $class = 'rt-message-notice';
+    $generalMessage = '';
     $message = __('No previous synchronizations with RealThanks found');
 } else {
+    $generalMessage = __('Last synchronization: ');
     if ($block->isSuccessful()) {
-        $class = 'message-success';
-        $message = __('Last synchronization at %1 UTC was successful', $block->getLatestSyncLogDate());
+        $class = 'rt-message-success';
+        $message = __('%1 UTC was successful', $block->getLatestSyncLogDate());
     } else {
-        $class = 'message-error';
+        $class = 'rt-message-error';
         $message = __(
-            'Last %1 synchronization at %2 UTC was failed: %3',
+            'for %1 at %2 UTC was failed: %3',
             $block->getLogErrorType(),
             $block->getLogErrorDate(),
             $block->getLogErrorMessage()
@@ -49,5 +50,10 @@ if ($block->getLatestSyncLogDate() === null) {
     }
 }
 ?>
-<div class="message <?= /* @noEscape */ $class ?>" data-ui-id="sync-status"><?= /* @noEscape */ $message ?></div>
-<div class="message message-balance" ><?= /* @noEscape */ $balance ?></div>
+<div class="rt-gift-message-container">
+    <div><b><?= /* @noEscape */ $balanceTxt ?></b><?= /* @noEscape */ $block->getCurrentBalance() ?></div>
+    <div class="<?= /* @noEscape */ $class ?>">
+        <b><?= /* @noEscape */ $generalMessage ?></b><?= /* @noEscape */ $message ?></div>
+    <button name="load_data" onclick="return updateData();">
+        <?= /* @noEscape */ __('Update RealThanks data') ?></button>
+</div>

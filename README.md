@@ -52,4 +52,4 @@ The extension exchanges next data types:
 
 For the **manual** update, go to `Marketing > RealThanks > Settings`. And press "Update RealThanks data".
 To configure **asynchronicity** updating, please put your schedule to the 
-`Marketing > RealThanks > Settings > Cron synchronization schedule > Schedule`.
+`Marketing > RealThanks > Settings > Synchronization > Cron schedule`.

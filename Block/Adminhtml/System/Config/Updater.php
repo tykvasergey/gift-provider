@@ -42,7 +42,7 @@ class Updater extends Field
      *
      * @return string
      */
-    public function getDataUpdaterUrl()
+    public function getDataUpdaterUrl(): string
     {
         return $this->getUrl('realthanks/config/update');
     }
@@ -62,7 +62,7 @@ class Updater extends Field
     /**
      * @return string|null
      */
-    public function getLatestSyncLogDate()
+    public function getLatestSyncLogDate(): ?string
     {
         if ($syncLog = $this->syncLogManagement->getLatestSync()) {
             return $syncLog->getCreatedAt();
@@ -86,7 +86,7 @@ class Updater extends Field
     /**
      * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         if ($this->getLogStatus() === null) {
             $this->loadData();
@@ -96,10 +96,10 @@ class Updater extends Field
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getCurrentBalance()
+    public function getCurrentBalance(): string
     {
-        return $this->syncLogManagement->getBalance();
+        return round($this->syncLogManagement->getBalance(), 2) . ' $';
     }
 }

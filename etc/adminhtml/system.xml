@@ -15,15 +15,12 @@
                 <comment>
                     <![CDATA[
                       <a href="https://realthanks.com/" target="_blank">Real Thanks application</a>
-                    | <a href="https://api.iced.me/doc/" target="_blank">Real Thanks documentation</a>
                     ]]>
                 </comment>
                 <label>API</label>
                 <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInStore="0"
                        showInWebsite="0">
                     <label>Enabled</label>
-                    <comment>
-                        <![CDATA[Don't have an API user? Find out about <a href="https://api.iced.me/doc/getting-started-with-the-api/" target="_blank">getting started with the Real Thanks API</a>.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0"
@@ -34,18 +31,13 @@
                     </depends>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
-                <field id="load_realthank_data" translate="button_label" sortOrder="20" showInDefault="1"
-                       showInWebsite="0" showInStore="0">
-                    <button_label>Update Real Thank Data</button_label>
-                    <frontend_model>RealThanks\GiftProvider\Block\Adminhtml\System\Config\Updater</frontend_model>
-                </field>
             </group>
             <group id="cron_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0"
                    showInStore="0">
-                <label>Cron synchronization schedule</label>
+                <label>Synchronization</label>
                 <field id="schedule" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0"
                        showInStore="0">
-                    <label>Schedule</label>
+                    <label>Cron schedule</label>
                     <comment><![CDATA[
                             <pre>
                             * * * * *
@@ -58,6 +50,11 @@
                             Example: 0 0 * * * Daily at midnight
                             </pre>
                             ]]></comment>
+                </field>
+                <field id="load_realthank_data" translate="button_label" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <button_label>Update Real Thank Data</button_label>
+                    <frontend_model>RealThanks\GiftProvider\Block\Adminhtml\System\Config\Updater</frontend_model>
                 </field>
             </group>
         </section>
