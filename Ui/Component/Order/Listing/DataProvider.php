@@ -13,7 +13,7 @@ class DataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvi
                     ->setValue($this->request->getParam('email'))
                     ->create()
             );
-            }
+        }
         return parent::getData();
     }
 }

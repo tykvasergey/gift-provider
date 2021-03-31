@@ -16,4 +16,3 @@ class SyncLog extends AbstractDb
         $this->_init('realthanks_provider_sync_log', 'sync_id');
     }
 }
-

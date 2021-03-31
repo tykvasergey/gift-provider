@@ -71,7 +71,8 @@ class Updater extends Field
         return null;
     }
 
-    private function loadData() {
+    private function loadData()
+    {
         if ($syncLog = $this->syncLogManagement->getLatestErrorSync()) {
             $this->setLogErrorDate($syncLog->getCreatedAt());
             $this->setLogErrorType($syncLog->getType());
@@ -85,7 +86,7 @@ class Updater extends Field
     /**
      * @return bool
      */
-    public function IsSuccessful()
+    public function isSuccessful()
     {
         if ($this->getLogStatus() === null) {
             $this->loadData();
@@ -93,7 +94,6 @@ class Updater extends Field
 
         return $this->getLogStatus();
     }
-
 
     /**
      * @return float

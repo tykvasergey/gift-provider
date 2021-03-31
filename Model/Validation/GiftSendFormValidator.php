@@ -32,7 +32,6 @@ class GiftSendFormValidator extends DataObject
         parent::__construct($data);
     }
 
-
     public function validate() : bool
     {
         return $this->validateRequiredFields() &&

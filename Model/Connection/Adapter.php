@@ -4,15 +4,14 @@ declare(strict_types=1);
 namespace RealThanks\GiftProvider\Model\Connection;
 
 use Magento\Framework\HTTP\Client\Curl;
-use Psr\Log\LoggerInterface;
 use RealThanks\GiftProvider\Exception\RtApiException;
 use RealThanks\GiftProvider\Helper\Config;
+use RealThanks\GiftProvider\Logger\Logger;
 use RealThanks\GiftProvider\Model\RtGiftRepository;
 use RealThanks\GiftProvider\Model\RtOrderRepository;
 
 class Adapter
 {
-    //const ORDER_RESPONSE_STATUS_KEY = 'status';
     const ORDER_COMPLETE_STATUS = 'Completed';
 
     //@todo change to live URL after testing
@@ -47,7 +46,7 @@ class Adapter
     private $giftOrderRepo;
 
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 
@@ -56,10 +55,15 @@ class Adapter
      * @param Config $configHelper
      * @param RtGiftRepository $giftRepo
      * @param RtOrderRepository $giftOrderRepo
-     * @param LoggerInterface $logger
+     * @param Logger $logger
      */
-    public function __construct(Curl $curl, Config $configHelper, RtGiftRepository $giftRepo, RtOrderRepository $giftOrderRepo, LoggerInterface $logger)
-    {
+    public function __construct(
+        Curl $curl,
+        Config $configHelper,
+        RtGiftRepository $giftRepo,
+        RtOrderRepository $giftOrderRepo,
+        Logger $logger
+    ) {
         $this->curl = $curl;
         $this->configHelper = $configHelper;
         $this->giftRepo = $giftRepo;
@@ -70,7 +74,10 @@ class Adapter
     private function init()
     {
         if (!$this->configHelper->isApiEnabled()) {
-            throw new RtApiException(__('RealThanks module API disabled in configuration. Please check the config node - "rt_gift_provider/api/enabled"'));
+            throw new RtApiException(
+                __('RealThanks module API disabled in configuration.
+                Please check the config node - "rt_gift_provider/api/enabled"')
+            );
         }
         $this->curl->addHeader("Content-Type", "application/json");
         $this->curl->addHeader("Authorization", "Bearer {$this->configHelper->getApiKey()}");
@@ -89,7 +96,9 @@ class Adapter
                 throw new RtApiException(__('Incorrect response - %1', $strResponse));
             }
         } else {
-            throw new RtApiException(__('Unknown API error. The response status - %1', $this->curl->getStatus()));
+            throw new RtApiException(
+                __('Unknown API error. The response status - %1', $this->curl->getStatus())
+            );
         }
 
         return $result;
@@ -160,7 +169,9 @@ class Adapter
             } else {
                 $strResponse = implode(' ,', $response);
                 $this->logger->error("RealThanks sendGift method. Incorrect response - {$strResponse}");
-                throw new RtApiException(__('RealThanks return incorrect response. Please check logs for the details.'));
+                throw new RtApiException(
+                    __('RealThanks return incorrect response. Please check logs for the details.')
+                );
             }
         } else {
             $this->handleSendGiftErrorResponse();
@@ -172,7 +183,8 @@ class Adapter
     private function handleSendGiftErrorResponse() : void
     {
         if (key_exists($this->curl->getStatus(), self::ORDER_ERROR_STATUSES)) {
-            throw new RtApiException(__(self::ORDER_ERROR_STATUSES[$this->curl->getStatus()]));
+            $message = self::ORDER_ERROR_STATUSES[$this->curl->getStatus()];
+            throw new RtApiException(__($message));
         }
 
         $status = $this->curl->getStatus();

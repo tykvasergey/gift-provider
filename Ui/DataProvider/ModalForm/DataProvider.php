@@ -11,5 +11,4 @@ class DataProvider extends ElementDataProvider
     {
         return [];
     }
-
 }

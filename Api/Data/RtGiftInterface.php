@@ -2,9 +2,6 @@
 
 namespace RealThanks\GiftProvider\Api\Data;
 
-/**
- * @package RealThanks\RealThanks\Api\Data
- */
 interface RtGiftInterface
 {
     const ENTITY_ID     = 'entity_id';

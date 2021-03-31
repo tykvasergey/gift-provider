@@ -5,12 +5,12 @@ namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchResultFactory;
+use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchCriteriaInterfaceFactory;
 use Magento\Framework\Api\SortOrderBuilder;
-use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -78,8 +78,17 @@ class RtOrderRepository implements \RealThanks\GiftProvider\Api\RtOrderRepositor
      * @param SortOrderBuilder $sortOrderBuilder
      * @param SearchResultFactory $searchResultsFactory
      */
-    public function __construct(GiftOrderResource $resource, RtOrderFactory $giftOrderFactory, CollectionFactory $resultCollectionFactory, SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory, CollectionProcessorInterface $collectionProcessor, SearchCriteriaBuilder $searchCriteriaBuilder, FilterBuilder $filterBuilder, SortOrderBuilder $sortOrderBuilder, SearchResultFactory $searchResultsFactory)
-    {
+    public function __construct(
+        GiftOrderResource $resource,
+        RtOrderFactory $giftOrderFactory,
+        CollectionFactory $resultCollectionFactory,
+        SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        FilterBuilder $filterBuilder,
+        SortOrderBuilder $sortOrderBuilder,
+        SearchResultFactory $searchResultsFactory
+    ) {
         $this->resource = $resource;
         $this->giftOrderFactory = $giftOrderFactory;
         $this->resultCollectionFactory = $resultCollectionFactory;

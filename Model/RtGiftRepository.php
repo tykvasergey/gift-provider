@@ -4,25 +4,22 @@ declare(strict_types=1);
 namespace RealThanks\GiftProvider\Model;
 
 use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchResult;
 use Magento\Framework\Api\Search\SearchResultFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchCriteriaInterfaceFactory;
 use Magento\Framework\Api\SortOrderBuilder;
-use Magento\Framework\Data\SearchResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use RealThanks\GiftProvider\Model\ResourceModel\RtGift\Collection;
-use RealThanks\GiftProvider\Model\ResourceModel\RtGift as GiftResource;
-use RealThanks\GiftProvider\Model\ResourceModel\RtGift\CollectionFactory;
 use RealThanks\GiftProvider\Api\Data\RtGiftInterface;
-use RealThanks\GiftProvider\Model\RtGiftFactory;
+use RealThanks\GiftProvider\Api\RtGiftRepositoryInterface;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift as GiftResource;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift\Collection;
+use RealThanks\GiftProvider\Model\ResourceModel\RtGift\CollectionFactory;
 
-
-class RtGiftRepository implements \RealThanks\GiftProvider\Api\RtGiftRepositoryInterface
+class RtGiftRepository implements RtGiftRepositoryInterface
 {
     /**
      * @var GiftResource
@@ -81,8 +78,17 @@ class RtGiftRepository implements \RealThanks\GiftProvider\Api\RtGiftRepositoryI
      * @param SortOrderBuilder $sortOrderBuilder
      * @param SearchResultFactory $searchResultsFactory
      */
-    public function __construct(GiftResource $resource, \RealThanks\GiftProvider\Model\RtGiftFactory $giftFactory, CollectionFactory $resultCollectionFactory, SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory, CollectionProcessorInterface $collectionProcessor, SearchCriteriaBuilder $searchCriteriaBuilder, FilterBuilder $filterBuilder, SortOrderBuilder $sortOrderBuilder, SearchResultFactory $searchResultsFactory)
-    {
+    public function __construct(
+        GiftResource $resource,
+        RtGiftFactory $giftFactory,
+        CollectionFactory $resultCollectionFactory,
+        SearchCriteriaInterfaceFactory $searchCriteriaInterfaceFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        FilterBuilder $filterBuilder,
+        SortOrderBuilder $sortOrderBuilder,
+        SearchResultFactory $searchResultsFactory
+    ) {
         $this->resource = $resource;
         $this->giftFactory = $giftFactory;
         $this->resultCollectionFactory = $resultCollectionFactory;
@@ -120,7 +126,9 @@ class RtGiftRepository implements \RealThanks\GiftProvider\Api\RtGiftRepositoryI
         $gift = $this->giftFactory->create();
         $this->resource->load($gift, $giftId);
         if (!$gift->getId()) {
-            throw new NoSuchEntityException(__('The RealThanks gift with the "%1" ID doesn\'t exist.', $giftId));
+            throw new NoSuchEntityException(
+                __('The RealThanks gift with the "%1" ID doesn\'t exist.', $giftId)
+            );
         }
 
         return $gift;

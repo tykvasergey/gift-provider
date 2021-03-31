@@ -77,7 +77,9 @@ class Send extends Action implements HttpGetActionInterface
                 ['order_model' => $orderModel]
             );
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
-            $this->messageManager->addSuccessMessage(__("Your gift was successfully sent. Your order id is - %1", $orderId));
+            $this->messageManager->addSuccessMessage(
+                __("Your gift was successfully sent. Your order id is - %1", $orderId)
+            );
         } catch (\Exception $e) {
             $this->errorNotification($e->getMessage(), $resultRedirect, $orderModel);
             try {
@@ -99,9 +101,14 @@ class Send extends Action implements HttpGetActionInterface
      * @param ResultInterface $resultRedirect
      * @param RtOrderInterface|null $orderModel
      */
-    private function errorNotification(string $errorMsg, ResultInterface $resultRedirect, RtOrderInterface $orderModel = null)
-    {
-        $this->messageManager->addErrorMessage(__('RealThanks API error. Please check the log for the details'));
+    private function errorNotification(
+        string $errorMsg,
+        ResultInterface $resultRedirect,
+        RtOrderInterface $orderModel = null
+    ) {
+        $this->messageManager->addErrorMessage(
+            __('RealThanks API error. Please check the log for the details')
+        );
         $this->logger->error($errorMsg);
         if ($orderModel) {
             $orderModel->setStatus('Error');
@@ -138,7 +145,9 @@ class Send extends Action implements HttpGetActionInterface
     private function validateOrder(RtOrderInterface $orderModel): void
     {
         if ($orderModel->getRtId()) {
-            throw new LocalizedException(__("Order (id = %1) was already send. It can`t be send again.", $orderModel->getId()));
+            throw new LocalizedException(
+                __("Order (id = %1) was already send. It can`t be send again.", $orderModel->getId())
+            );
         }
     }
 }

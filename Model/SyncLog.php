@@ -118,4 +118,3 @@ class SyncLog extends AbstractModel
         $this->setData('creation_time', $value);
     }
 }
-

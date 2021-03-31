@@ -67,7 +67,7 @@ class SyncLogManagement
 
             if (count($collection)) {
                 $syncLog = $collection->getFirstItem();
-                if (!$syncLog->IsSuccessful()) {
+                if (!$syncLog->isSuccessful()) {
                     return $syncLog;
                 }
             }

@@ -2,9 +2,7 @@
 
 namespace RealThanks\GiftProvider\Api;
 
-use Magento\Framework\Api\Search\SearchResult;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Data\SearchResultInterface;
 use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
 
 /**
@@ -19,7 +17,8 @@ interface RtOrderRepositoryInterface
      * @return \Magento\Framework\Api\Search\SearchResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): \Magento\Framework\Api\Search\SearchResultInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria):
+    \Magento\Framework\Api\Search\SearchResultInterface;
 
     /**
      * Retrieve RT Order.
