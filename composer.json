@@ -1,20 +1,21 @@
 {
-  "name": "realthanks/gift-provider",
-  "version": "1.0.0",
-  "description": "N/A",
-  "type": "magento2-module",
-  "require": {
-    "magento/framework": "*"
-  },
-  "license": [
-    "Proprietary"
-  ],
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "realthanks/gift-provider",
+    "version": "1.0.0",
+    "description": "Integration module with the Realthanks application",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "^102|^103",
+        "php": "~7.2.0||~7.3.0||~7.4.0"
+    },
+    "license": [
+        "OSL-3.0"
     ],
-    "psr-4": {
-      "RealThanks\\GiftProvider\\": ""
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "RealThanks\\GiftProvider\\": ""
+        }
     }
-  }
 }
