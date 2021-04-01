@@ -5,6 +5,7 @@ namespace RealThanks\GiftProvider\Block\Adminhtml\System\Config;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
+use RealThanks\GiftProvider\Helper\PriceFormatter;
 use RealThanks\GiftProvider\Model\SyncLogManagement;
 
 class Updater extends Field
@@ -100,6 +101,6 @@ class Updater extends Field
      */
     public function getCurrentBalance(): string
     {
-        return round($this->syncLogManagement->getBalance(), 2) . ' $';
+        return PriceFormatter::format($this->syncLogManagement->getBalance());
     }
 }

@@ -5,6 +5,7 @@ namespace RealThanks\GiftProvider\Model\Source;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Data\OptionSourceInterface;
+use RealThanks\GiftProvider\Helper\PriceFormatter;
 use RealThanks\GiftProvider\Model\RtGift;
 use RealThanks\GiftProvider\Model\RtGiftRepository;
 
@@ -40,7 +41,7 @@ class RtGiftSource implements OptionSourceInterface
         foreach ($this->getGifts() as $item) {
             $res[] = [
                 'value' => $item->getId(),
-                'label' => $item->getName() . ', ' . $item->getCost() . '$',
+                'label' => $item->getName() . ', ' . PriceFormatter::format($item->getCost()),
                 'image' => $item->getImageUrl()
             ];
         }
