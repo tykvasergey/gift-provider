@@ -38,7 +38,7 @@
                 <option name="title" xsi:type="string" translate="true">Send gift</option>
             </options>
         </settings>
-        <insertForm name="send_gift_form_loader" sortOrder="2010" component="RealThanks_GiftProvider/js/form/components/insert-send-gift-form">
+        <insertForm name="send_gift_form_loader" component="RealThanks_GiftProvider/js/form/components/insert-send-gift-form">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="giftModalProvider" xsi:type="string">${ $.parentName }</item>
@@ -62,6 +62,7 @@
                 </exports>
                 <imports>
                     <link name="customer_email">${ $.provider}:data.customer.email</link>
+                    <link name="modalStatus">${ $.parentName }:state</link>
                 </imports>
             </settings>
         </insertForm>

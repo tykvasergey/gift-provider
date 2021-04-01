@@ -17,7 +17,8 @@ define([
     return Insert.extend({
         defaults: {
             listens: {
-                responseData: 'onResponse'
+                responseData: 'onResponse',
+                modalStatus: 'onModalStatus'
             },
             modules: {
                 giftModalProvider: '${ $.giftModalProvider }'
@@ -53,13 +54,17 @@ define([
          * @param {Object} responseData
          */
         onResponse: function (responseData) {
+            this.showMessage(responseData);
             if (responseData.status !== 'Error') {
                 this.giftModalProvider().closeModal();
                 this.resetForm();
-            } else {
-
             }
-            this.showMessage(responseData);
+        },
+
+        onModalStatus: function (open) {
+            if (open) {
+                this.clearPreviousMessage();
+            }
         },
 
         showMessage: function (responseData) {
@@ -80,6 +85,10 @@ define([
                         }
                     }
                 });
+        },
+
+        clearPreviousMessage() {
+            $('.insert-gift-form-modal #rt_message_wrap').empty();
         }
     });
 });
