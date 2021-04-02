@@ -141,7 +141,7 @@
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Created</label>
-                <dateFormat>mm/dd/yyyy HH:mm:ss</dateFormat>
+                <dateFormat>MM/d/yyyy HH:mm:ss</dateFormat>
             </settings>
         </column>
         <column name="update_time"
@@ -152,7 +152,7 @@
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Modified</label>
-                <dateFormat>mm/dd/yyyy HH:mm:ss</dateFormat>
+                <dateFormat>MM/dd/yyyy HH:mm:ss</dateFormat>
             </settings>
         </column>
         <actionsColumn name="actions"

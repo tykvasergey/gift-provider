@@ -5,9 +5,9 @@ namespace RealThanks\GiftProvider\Helper;
 
 class PriceFormatter
 {
-    public static function format(float $price) : string
+    public function format(float $price) : string
     {
-        $fmt = new \NumberFormatter( 'de_DE', \NumberFormatter::CURRENCY );
+        $fmt = new \NumberFormatter('de_DE', \NumberFormatter::CURRENCY);
 
         return $fmt->formatCurrency($price, "USD");
     }

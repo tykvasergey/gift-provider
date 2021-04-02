@@ -1,10 +1,28 @@
 <?php
 namespace RealThanks\GiftProvider\Ui\Component\Gift\Listing\Column;
 
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
 use RealThanks\GiftProvider\Helper\PriceFormatter;
 
 class Cost extends \Magento\Ui\Component\Listing\Columns\Column
 {
+    /**
+     * @var PriceFormatter
+     */
+    private $formatter;
+
+    public function __construct(
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
+        PriceFormatter $formatter,
+        array $components = [],
+        array $data = []
+    ) {
+        $this->formatter = $formatter;
+        parent::__construct($context, $uiComponentFactory, $components, $data);
+    }
+
     /**
      * Prepare Data Source
      *
@@ -17,7 +35,7 @@ class Cost extends \Magento\Ui\Component\Listing\Columns\Column
             $fieldName = $this->getData('name');
             foreach ($dataSource['data']['items'] as & $item) {
                 if ($fieldName === 'cost' && $item[$fieldName]) {
-                    $item[$fieldName] = PriceFormatter::format($item[$fieldName]);
+                    $item[$fieldName] = $this->formatter->format($item[$fieldName]);
                 }
             }
         }

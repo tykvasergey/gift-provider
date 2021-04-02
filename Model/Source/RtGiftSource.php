@@ -22,11 +22,20 @@ class RtGiftSource implements OptionSourceInterface
     private $searchCriteria;
 
     /**
+     * @var PriceFormatter
+     */
+    private $formatter;
+
+    /**
      * @param RtGiftRepository $giftRepo
      * @param SearchCriteriaBuilder $searchCriteria
      */
-    public function __construct(RtGiftRepository $giftRepo, SearchCriteriaBuilder $searchCriteria)
-    {
+    public function __construct(
+        RtGiftRepository $giftRepo,
+        SearchCriteriaBuilder $searchCriteria,
+        PriceFormatter $formatter
+    ) {
+        $this->formatter = $formatter;
         $this->giftRepo = $giftRepo;
         $this->searchCriteria = $searchCriteria;
     }
@@ -41,7 +50,7 @@ class RtGiftSource implements OptionSourceInterface
         foreach ($this->getGifts() as $item) {
             $res[] = [
                 'value' => $item->getId(),
-                'label' => $item->getName() . ', ' . PriceFormatter::format($item->getCost()),
+                'label' => $item->getName() . ', ' . $this->formatter->format($item->getCost()),
                 'image' => $item->getImageUrl()
             ];
         }

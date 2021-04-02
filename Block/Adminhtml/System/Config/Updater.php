@@ -13,7 +13,12 @@ class Updater extends Field
     /**
      * @var SyncLogManagement
      */
-    protected $syncLogManagement;
+    private $syncLogManagement;
+
+    /**
+     * @var PriceFormatter
+     */
+    private $formatter;
 
     /**
      * @param Context $context
@@ -23,9 +28,11 @@ class Updater extends Field
     public function __construct(
         Context $context,
         SyncLogManagement $syncLogManagement,
+        PriceFormatter $formatter,
         array $data = []
     ) {
         $this->syncLogManagement = $syncLogManagement;
+        $this->formatter = $formatter;
         parent::__construct($context, $data);
     }
 
@@ -101,6 +108,6 @@ class Updater extends Field
      */
     public function getCurrentBalance(): string
     {
-        return PriceFormatter::format($this->syncLogManagement->getBalance());
+        return $this->formatter->format($this->syncLogManagement->getBalance());
     }
 }
