@@ -14,8 +14,7 @@ class Adapter
 {
     const ORDER_COMPLETE_STATUS = 'Completed';
 
-    //@todo change to live URL after testing
-    const BASE_API_URL = 'https://api.iced.me/v1/client/';
+    const BASE_API_URL = 'https://www.realthanks.com/v1/client/';
 
     const ORDER_ERROR_STATUSES = [
         422 => 'please check your RealThanks limit',
