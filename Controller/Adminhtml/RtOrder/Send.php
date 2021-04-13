@@ -12,6 +12,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use RealThanks\GiftProvider\Api\Data\RtOrderInterface;
+use RealThanks\GiftProvider\Exception\RtApiException;
 use RealThanks\GiftProvider\Logger\Logger;
 use RealThanks\GiftProvider\Model\Connection\Adapter;
 use RealThanks\GiftProvider\Model\RtOrderRepository;
@@ -81,7 +82,7 @@ class Send extends Action implements HttpGetActionInterface
                 __("Your gift was successfully sent. Your order id is - %1", $orderId)
             );
         } catch (\Exception $e) {
-            $this->errorNotification($e->getMessage(), $resultRedirect, $orderModel);
+            $this->errorNotification($e, $resultRedirect, $orderModel);
             try {
                 $this->giftOrderRepo->save($orderModel);
             } catch (CouldNotSaveException $e) {
@@ -97,18 +98,26 @@ class Send extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @param string $errorMsg
+     * @param \Exception $e
      * @param ResultInterface $resultRedirect
      * @param RtOrderInterface|null $orderModel
      */
     private function errorNotification(
-        string $errorMsg,
+        \Exception $e,
         ResultInterface $resultRedirect,
         RtOrderInterface $orderModel = null
-    ) {
-        $this->messageManager->addErrorMessage(
-            __('RealThanks API error. Please check the log for the details')
-        );
+    )
+    {
+        $errorMsg = $e->getMessage();
+        if ($e instanceof RtApiException) {
+            $this->messageManager->addErrorMessage(
+                __("RealThanks API error - {$errorMsg}")
+            );
+        } else {
+            $this->messageManager->addErrorMessage(
+                __('General RealThanks API error. Please check the log for the details')
+            );
+        }
         $this->logger->error($errorMsg);
         if ($orderModel) {
             $orderModel->setStatus('Error');
