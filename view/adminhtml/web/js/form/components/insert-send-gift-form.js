@@ -55,8 +55,8 @@ define([
          */
         onResponse: function (responseData) {
             this.showMessage(responseData);
+            this.giftModalProvider().closeModal();
             if (responseData.status !== 'Error') {
-                this.giftModalProvider().closeModal();
                 this.resetForm();
             }
         },

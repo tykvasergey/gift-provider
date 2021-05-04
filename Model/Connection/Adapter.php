@@ -18,9 +18,9 @@ class Adapter
 
     const ORDER_ERROR_STATUSES = [
         422 => 'please check your RealThanks limit',
-        442 => 'you tried to send gift that is out-of-stock',
+        442 => 'your balance is not enough for sending this order',
         444 => 'please synchronize gifts, your data (price) is outdated',
-        445 => 'your balance is not enough for sending this order',
+        445 => 'you tried to send gift that is out-of-stock',
         446 => 'RealThanks payment processing is temporarily unavailable. Please try again later'
     ];
 
@@ -96,7 +96,7 @@ class Adapter
             }
         } else {
             throw new RtApiException(
-                __('Unknown API error. The response status - %1', $this->curl->getStatus())
+                __('Unknown API error. The response status - %1. Please check your API credentials', $this->curl->getStatus())
             );
         }
 
