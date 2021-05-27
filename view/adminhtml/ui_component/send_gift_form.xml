@@ -47,7 +47,8 @@
         </settings>
 
         <field name="gift_id"
-               formElement="select" sortOrder="5">
+               formElement="select"
+               component="RealThanks_GiftProvider/js/form/components/options" sortOrder="5">
             <settings>
                 <dataType>text</dataType>
                 <label translate="true">Real Thanks gift</label>
@@ -62,6 +63,13 @@
                     </settings>
                 </select>
             </formElements>
+        </field>
+
+        <field name="image_id"
+               formElement="text"
+               component="RealThanks_GiftProvider/js/form/components/thumbnail"
+               template="RealThanks_GiftProvider/form/element/thumbnail" sortOrder="6">
+
         </field>
 
 
